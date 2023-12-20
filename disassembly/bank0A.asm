@@ -17,12 +17,15 @@ gsu_decompress_lc_lz16:
   add   r0                                  ; $0A8012 |
   add   r0                                  ; $0A8013 |
   add   r0                                  ; $0A8014 |
-  to r6                                     ; $0A8015 |
+  to r6                                     ; $0A8015 | first nybble of data in high byte of r6
   add   r0                                  ; $0A8016 |
   link  #4                                  ; $0A8017 |
-  iwt   r15,#$81B3                          ; $0A8018 |
+  iwt   r15,#increment_rom_ptr              ; $0A8018 |
   getb                                      ; $0A801B |
 
+; second nybble of first byte to low byte of r6
+; and first nybble of second into high byte r7
+CODE_0A801C:
   rol                                       ; $0A801C |
   or    r6                                  ; $0A801D |
   to r6                                     ; $0A801E |
@@ -34,9 +37,12 @@ gsu_decompress_lc_lz16:
   to r7                                     ; $0A8024 |
   add   r0                                  ; $0A8025 |
   link  #4                                  ; $0A8026 |
-  iwt   r15,#$81B3                          ; $0A8027 |
+  iwt   r15,#increment_rom_ptr              ; $0A8027 |
   getb                                      ; $0A802A |
 
+; second nybble of second byte to r7 and first
+; nybble of third into r8
+CODE_0A802B:
   rol                                       ; $0A802B |
   or    r7                                  ; $0A802C |
   to r7                                     ; $0A802D |
@@ -48,30 +54,34 @@ gsu_decompress_lc_lz16:
   to r8                                     ; $0A8033 |
   add   r0                                  ; $0A8034 |
   link  #4                                  ; $0A8035 |
-  iwt   r15,#$81B3                          ; $0A8036 |
+  iwt   r15,#increment_rom_ptr              ; $0A8036 |
   getb                                      ; $0A8039 |
 
+; second nybble of third byte to r8 and first
+; nybble of fourth into r9
+CODE_0A803A:
   rol                                       ; $0A803A |
   or    r8                                  ; $0A803B |
-  to r8                                     ; $0A803C |
-  and   r4                                  ; $0A803D |
-  getb                                      ; $0A803E |
-  to r9                                     ; $0A803F |
-  and   r4                                  ; $0A8040 |
+  to r8                                     ; $0A803C |\  after this, r6 through r8 and the low byte of r9
+  and   r4                                  ; $0A803D | | have the first 7 nybbles of data (e.g. if the first byte
+  getb                                      ; $0A803E | | is $32, r6 will contain $0302). these are palette indices
+  to r9                                     ; $0A803F | | used in the decompression routine
+  and   r4                                  ; $0A8040 |/
   sub   r0                                  ; $0A8041 |\
   ibt   r1,#$0000                           ; $0A8042 | |
   ibt   r12,#$0040                          ; $0A8044 | |
   cache                                     ; $0A8046 | | clear out SRAM
   move  r13,r15                             ; $0A8047 | | $700000~$70007F
   stw   (r1)                                ; $0A8049 | | with $0000
-  inc   r1                                  ; $0A804A | |
+  inc   r1                                  ; $0A804A | | used as decompression buffer
   loop                                      ; $0A804B | |
   inc   r1                                  ; $0A804C |/
-  dec   r1                                  ; $0A804D |
+  dec   r1                                  ; $0A804D | r1 = $7F (lz16 decompresses in chunks of $80 bytes)
   link  #4                                  ; $0A804E |
-  iwt   r15,#$81B3                          ; $0A804F |
+  iwt   r15,#increment_rom_ptr              ; $0A804F |
   getb                                      ; $0A8052 |
 
+CODE_0A8053:
   ibt   r10,#$0005                          ; $0A8053 |
   lsr                                       ; $0A8055 |
   lsr                                       ; $0A8056 |
@@ -82,7 +92,7 @@ CODE_0A805B:
   bne CODE_0A8063                           ; $0A805B |
   lsr                                       ; $0A805D |
   link  #4                                  ; $0A805E |
-  iwt   r15,#$81B3                          ; $0A805F |
+  iwt   r15,#increment_rom_ptr              ; $0A805F |
   getb                                      ; $0A8062 |
 
 CODE_0A8063:
@@ -130,6 +140,7 @@ CODE_0A8091:
   stb   (r1)                                ; $0A8091 |
   move  r0,r4                               ; $0A8093 |
 
+; TODO i think this is the main command processor
 CODE_0A8095:
   ibt   r12,#$0000                          ; $0A8095 |
   ibt   r4,#$0001                           ; $0A8097 |
@@ -141,7 +152,7 @@ CODE_0A809C:
   bne CODE_0A80A5                           ; $0A809D |
   lsr                                       ; $0A809F |
   link  #4                                  ; $0A80A0 |
-  iwt   r15,#$81B3                          ; $0A80A1 |
+  iwt   r15,#increment_rom_ptr              ; $0A80A1 |
   getb                                      ; $0A80A4 |
 
 CODE_0A80A5:
@@ -155,14 +166,14 @@ CODE_0A80A9:
   dec   r10                                 ; $0A80AB |
 
 CODE_0A80AC:
-  bne CODE_0A80B4                           ; $0A80AC |
+  bne CODE_0A80B4                           ; $0A80AC | if r10 not zero, branch
   lsr                                       ; $0A80AE |
   link  #4                                  ; $0A80AF |
-  iwt   r15,#$81B3                          ; $0A80B0 |
+  iwt   r15,#increment_rom_ptr              ; $0A80B0 |
   getb                                      ; $0A80B3 |
 
 CODE_0A80B4:
-  bcs CODE_0A809C                           ; $0A80B4 |
+  bcs CODE_0A809C                           ; $0A80B4 | branch on result of r0 lsr
   with r12                                  ; $0A80B6 |
   or    r4                                  ; $0A80B7 |
   moves r9,r9                               ; $0A80B8 |
@@ -171,7 +182,7 @@ CODE_0A80B4:
   bne CODE_0A80C5                           ; $0A80BD |
   lsr                                       ; $0A80BF |
   link  #4                                  ; $0A80C0 |
-  iwt   r15,#$81B3                          ; $0A80C1 |
+  iwt   r15,#increment_rom_ptr              ; $0A80C1 |
   getb                                      ; $0A80C4 |
 
 CODE_0A80C5:
@@ -180,7 +191,7 @@ CODE_0A80C5:
   bne CODE_0A80D0                           ; $0A80C8 |
   lsr                                       ; $0A80CA |
   link  #4                                  ; $0A80CB |
-  iwt   r15,#$81B3                          ; $0A80CC |
+  iwt   r15,#increment_rom_ptr              ; $0A80CC |
   getb                                      ; $0A80CF |
 
 CODE_0A80D0:
@@ -252,13 +263,13 @@ CODE_0A8116:
   bne CODE_0A8121                           ; $0A8119 |
   lsr                                       ; $0A811B |
   link  #4                                  ; $0A811C |
-  iwt   r15,#$81B3                          ; $0A811D |
+  iwt   r15,#increment_rom_ptr              ; $0A811D |
   getb                                      ; $0A8120 |
 
 CODE_0A8121:
   with r9                                   ; $0A8121 |
   ror                                       ; $0A8122 |
-  iwt   r15,#$8096                          ; $0A8123 |
+  iwt   r15,#CODE_0A8095+1                 ; $0A8123 |
   db $AC                                    ; $0A8126 | ibt r12,#$xx
 
 CODE_0A8127:
@@ -268,7 +279,7 @@ CODE_0A8128:
   bne CODE_0A8130                           ; $0A8128 |
   lsr                                       ; $0A812A |
   link  #4                                  ; $0A812B |
-  iwt   r15,#$81B3                          ; $0A812C |
+  iwt   r15,#increment_rom_ptr              ; $0A812C |
   getb                                      ; $0A812F |
 
 CODE_0A8130:
@@ -277,7 +288,7 @@ CODE_0A8130:
   bne CODE_0A813A                           ; $0A8133 |
   lsr                                       ; $0A8135 |
   link  #3                                  ; $0A8136 |
-  bra CODE_0A81B3                           ; $0A8137 |
+  bra increment_rom_ptr                     ; $0A8137 |
   getb                                      ; $0A8139 |
 
 CODE_0A813A:
@@ -286,7 +297,7 @@ CODE_0A813A:
   bne CODE_0A8144                           ; $0A813D |
   lsr                                       ; $0A813F |
   link  #3                                  ; $0A8140 |
-  bra CODE_0A81B3                           ; $0A8141 |
+  bra increment_rom_ptr                     ; $0A8141 |
   getb                                      ; $0A8143 |
 
 CODE_0A8144:
@@ -301,7 +312,7 @@ CODE_0A814C:
   bne CODE_0A8153                           ; $0A814C |
   lsr                                       ; $0A814E |
   link  #3                                  ; $0A814F |
-  bra CODE_0A81B3                           ; $0A8150 |
+  bra increment_rom_ptr                     ; $0A8150 |
   getb                                      ; $0A8152 |
 
 CODE_0A8153:
@@ -310,7 +321,7 @@ CODE_0A8153:
   bne CODE_0A815D                           ; $0A8156 |
   lsr                                       ; $0A8158 |
   link  #3                                  ; $0A8159 |
-  bra CODE_0A81B3                           ; $0A815A |
+  bra increment_rom_ptr                     ; $0A815A |
   getb                                      ; $0A815C |
 
 CODE_0A815D:
@@ -325,7 +336,7 @@ CODE_0A8165:
   bne CODE_0A816C                           ; $0A8165 |
   lsr                                       ; $0A8167 |
   link  #3                                  ; $0A8168 |
-  bra CODE_0A81B3                           ; $0A8169 |
+  bra increment_rom_ptr                     ; $0A8169 |
   getb                                      ; $0A816B |
 
 CODE_0A816C:
@@ -340,7 +351,7 @@ CODE_0A8174:
   bne CODE_0A817B                           ; $0A8174 |
   lsr                                       ; $0A8176 |
   link  #3                                  ; $0A8177 |
-  bra CODE_0A81B3                           ; $0A8178 |
+  bra increment_rom_ptr                     ; $0A8178 |
   getb                                      ; $0A817A |
 
 CODE_0A817B:
@@ -357,7 +368,7 @@ CODE_0A8185:
   bne CODE_0A818F                           ; $0A8188 |
   lsr                                       ; $0A818A |
   link  #3                                  ; $0A818B |
-  bra CODE_0A81B3                           ; $0A818C |
+  bra increment_rom_ptr                     ; $0A818C |
   getb                                      ; $0A818E |
 
 CODE_0A818F:
@@ -367,7 +378,7 @@ CODE_0A818F:
   bne CODE_0A8199                           ; $0A8192 |
   lsr                                       ; $0A8194 |
   link  #3                                  ; $0A8195 |
-  bra CODE_0A81B3                           ; $0A8196 |
+  bra increment_rom_ptr                     ; $0A8196 |
   getb                                      ; $0A8198 |
 
 CODE_0A8199:
@@ -377,7 +388,7 @@ CODE_0A8199:
   bne CODE_0A81A3                           ; $0A819C |
   lsr                                       ; $0A819E |
   link  #3                                  ; $0A819F |
-  bra CODE_0A81B3                           ; $0A81A0 |
+  bra increment_rom_ptr                     ; $0A81A0 |
   getb                                      ; $0A81A2 |
 
 CODE_0A81A3:
@@ -387,7 +398,7 @@ CODE_0A81A3:
   bne CODE_0A81AD                           ; $0A81A6 |
   lsr                                       ; $0A81A8 |
   link  #3                                  ; $0A81A9 |
-  bra CODE_0A81B3                           ; $0A81AA |
+  bra increment_rom_ptr                     ; $0A81AA |
   getb                                      ; $0A81AC |
 
 CODE_0A81AD:
@@ -396,8 +407,11 @@ CODE_0A81AD:
   iwt   r15,#$8107                          ; $0A81AF |
   with r15                                  ; $0A81B2 |
 
-; decompression subroutine
-CODE_0A81B3:
+; increment the pointer to ROM in r14, accounting
+; for rollover ($80 has a copy of the bank byte)
+; also has the side-effect of setting r10 to $08
+; (todo: why? it's clearly intentional)
+increment_rom_ptr:
   inc   r14                                 ; $0A81B3 |
   bne CODE_0A81C4+1                         ; $0A81B4 |
   ibt   r10,#$0008                          ; $0A81B6 |
@@ -409,6 +423,8 @@ CODE_0A81B3:
   romb                                      ; $0A81C0 |
   ibt   r14,#$0000                          ; $0A81C2 |
 
+; the 'with r10' prefix comes first, so
+; the branch above stores #$08 to r0
 CODE_0A81C4:
   ibt   r10,#$0008                          ; $0A81C4 |
   move  r15,r11                             ; $0A81C6 |\ return
@@ -741,7 +757,7 @@ CODE_0A8360:
 CODE_0A8386:
   add   r2                                  ; $0A8386 |
   sms   ($000E),r0                          ; $0A8387 |
-  iwt   r0,#$85E4                           ; $0A838A |
+  iwt   r0,#DATA_0A85E4                     ; $0A838A |
   sms   ($0020),r0                          ; $0A838D |
 
   link  #4                                  ; $0A8390 |
@@ -1005,6 +1021,7 @@ CODE_0A850B:
   lms   r1,($0014)                          ; $0A850B |
   lms   r0,($0016)                          ; $0A850E |
   to r2                                     ; $0A8511 |
+CODE_0A8512:
   sub   #8                                  ; $0A8512 |
   iwt   r5,#$00D2                           ; $0A8514 |
   iwt   r6,#$3372                           ; $0A8517 |
@@ -1152,7 +1169,7 @@ CODE_0A85AB:
 CODE_0A85D3:
   lm    r1,($1680)                          ; $0A85D3 |
   lm    r0,($1682)                          ; $0A85D7 |
-  iwt   r15,#$8512                          ; $0A85DB |
+  iwt   r15,#CODE_0A8512                    ; $0A85DB |
   to r2                                     ; $0A85DE |
 
 CODE_0A85DF:
@@ -1160,6 +1177,7 @@ CODE_0A85DF:
   jmp   r11                                 ; $0A85E2 |
   nop                                       ; $0A85E3 |
 
+DATA_0A85E4:
   db $EA, $C0, $0E, $C0, $E0, $F0, $18, $F0 ; $0A85E4 |
   db $00, $B0, $00, $00, $02, $04, $0E, $04 ; $0A85EC |
   db $02, $14, $0E, $14, $08, $20, $02, $12 ; $0A85F4 |

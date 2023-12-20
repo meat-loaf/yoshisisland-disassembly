@@ -88,7 +88,7 @@ CODE_00808C:
   STZ !r_last_world_unlocked                ; $0080AD |
   LDX #$08                                  ; $0080B0 |\
   LDA #$A97B                                ; $0080B2 | | initialize RAMBR to #$0000
-  JSL r_gsu_init_1                          ; $0080B5 |/ GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $0080B5 |/ GSU init
   SEP #$20                                  ; $0080B9 |
   LDA $707E7D                               ; $0080BB |\
   BNE CODE_0080C9                           ; $0080BF | |
@@ -438,6 +438,7 @@ execute_ptr:
   LDY $03                                   ; $00837B |  restore Y
   JML [$0000]                               ; $00837D | jump to the pointer
 
+; unused
 execute_ptr_long:
   STY $05                                   ; $008380 | preserve Y
   PLY                                       ; $008382 |\ pull the high byte and bank byte and store it in $02
@@ -5437,10 +5438,10 @@ decompress_gfx_file:
   LDA $06FC7B,x                             ; $00B530 |\
   AND #$00FF                                ; $00B534 | | r0 = bank of gfx file
   STA !gsu_r0                               ; $00B537 |/
-  SEP #$10                                  ; $00B53A |\
-  LDX #$0A                                  ; $00B53C | | gsu_decompress_lc_lz16
-  LDA #$8000                                ; $00B53E | |
-  JSL r_gsu_init_1                          ; $00B541 |/
+  SEP #$10                                  ; $00B53A |
+  LDX.b #(gsu_decompress_lc_lz16>>16)       ; $00B53C |
+  LDA #gsu_decompress_lc_lz16               ; $00B53E |
+  JSL r_gsu_init_1                          ; $00B541 |
   REP #$10                                  ; $00B545 |
   LDY $0A                                   ; $00B547 |
   SEP #$20                                  ; $00B549 |
@@ -5457,10 +5458,10 @@ decompress_lc_lz1:
   STA !gsu_r4                               ; $00B55C |/
   LDA #$5800                                ; $00B55F |\ r10 = SRAM destination
   STA !gsu_r10                              ; $00B562 |/
-  SEP #$10                                  ; $00B565 |\
-  LDX #$08                                  ; $00B567 | | gsu_decompress_lc_lz1
-  LDA #$A980                                ; $00B569 | |
-  JSL r_gsu_init_1                          ; $00B56C |/
+  SEP #$10                                  ; $00B565 |
+  LDX.b #(gsu_decompress_lc_lz1>>16)        ; $00B567 |
+  LDA #gsu_decompress_lc_lz1                ; $00B569 |
+  JSL r_gsu_init_1                          ; $00B56C |
   REP #$10                                  ; $00B570 |
   LDA !gsu_r10                              ; $00B572 |\  returns r10 as end
   SEC                                       ; $00B575 | | end - start = size
@@ -5690,8 +5691,8 @@ decompress_lc_lz1_l:
   AND #$00FF                                ; $00B76F | | r4 = bank of gfx file
   STA !gsu_r4                               ; $00B772 |/
   SEP #$10                                  ; $00B775 |\
-  LDX #$08                                  ; $00B777 | | gsu_decompress_lc_lz1
-  LDA #$A980                                ; $00B779 | |
+  LDX.b #(gsu_decompress_lc_lz1>>16)        ; $00B777 | | gsu_decompress_lc_lz1
+  LDA #gsu_decompress_lc_lz1                ; $00B779 | |
   JSL r_gsu_init_1                          ; $00B77C |/
   REP #$10                                  ; $00B780 |
   LDA !gsu_r10                              ; $00B782 |\  returns r10 as end
@@ -7382,8 +7383,8 @@ CODE_00C71E:
   JSL main_player                           ; $00C72A |
   JSL handle_sprites                        ; $00C72E |
   REP #$20                                  ; $00C732 |
-  LDX #$08                                  ; $00C734 |
-  LDA #$B1EF                                ; $00C736 |
+  LDX.b #(copy_oam_buffer>>16)              ; $00C734 |
+  LDA #copy_oam_buffer                      ; $00C736 |
   JSL r_gsu_init_1                          ; $00C739 | GSU init
   INC $0D23                                 ; $00C73D |
   INC $0D25                                 ; $00C740 |
@@ -7432,8 +7433,8 @@ CODE_00C778:
   STA !gsu_r9                               ; $00C79A |
   LDA $0D1F                                 ; $00C79D |
   STA !gsu_r8                               ; $00C7A0 |
-  LDX #$09                                  ; $00C7A3 |
-  LDA #$E92F                                ; $00C7A5 |
+  LDX.b #(CODE_09E92F>>16)                  ; $00C7A3 |
+  LDA #CODE_09E92F                          ; $00C7A5 |
   JSL r_gsu_init_1                          ; $00C7A8 | GSU init
   LDA !gsu_r11                              ; $00C7AC |
   STA $0D21                                 ; $00C7AF |
