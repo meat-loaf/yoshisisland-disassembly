@@ -1,6 +1,6 @@
 .PHONY: clean
 
-ASAR?=asar
+ASAR?=asar --symbols=wla
 
 DEPS=$(wildcard disassembly/*.asm) \
      $(wildcard disassembly/gfx/*.asm) \
@@ -25,6 +25,9 @@ validate_sha256  :: $(ROM_NAME)
 
 $(ROM_NAME): $(DEPS)
 	$(ASAR) ./disassembly/assemble.asm $(ROM_NAME)
+
+rtest:
+	$(ASAR) -Dreloc_test ./disassembly/assemble.asm $(ROM_NAME)
 
 clean:
 	rm -f yi.sfc

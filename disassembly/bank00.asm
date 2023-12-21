@@ -302,6 +302,7 @@ oam_high_buffer_to_table:
   SEP #$20                                  ; $008272 |
   RTL                                       ; $008274 |
 
+empty_tilemap_dma_queue_entry:
   db $FF,$FF                                ; $008275 |
 
 ; called by routines loading new screens
@@ -372,7 +373,7 @@ CODE_0082D0:
   STA $20                                   ; $0082E6 | |
   LDX #$7E                                  ; $0082E8 | | init $7E0200 - $7EBFFF
   STX $22                                   ; $0082EA | |
-  LDA #$BE00                                ; $0082EC | |
+  LDA #($C000-$200-($C000-NMI))             ; $0082EC | | LDA #$BE00
   JSL dma_init_gen_purpose                  ; $0082EF |/
   STZ $20                                   ; $0082F3 |\
   LDX #$7F                                  ; $0082F5 | |
@@ -438,6 +439,7 @@ execute_ptr:
   LDY $03                                   ; $00837B |  restore Y
   JML [$0000]                               ; $00837D | jump to the pointer
 
+if not(defined("reloc_test"))
 ; unused
 execute_ptr_long:
   STY $05                                   ; $008380 | preserve Y
@@ -464,6 +466,7 @@ execute_ptr_long:
   PLB                                       ; $0083A2 |/
   LDY $05                                   ; $0083A3 |  restore Y
   JML [$0000]                               ; $0083A5 | jump to the pointer
+endif
 
 gm1e_start_select_level_fade:
   LDX $0201                                 ; $0083A8 |
@@ -792,6 +795,7 @@ push_sound_queue:
 init_kamek_OH_MY:
   RTL                                       ; $0085DC |
 
+DATA_0085DD:
   dw $8607                                  ; $0085DD |
   dw $8641                                  ; $0085DF |
   dw $8670                                  ; $0085E1 |
@@ -814,7 +818,7 @@ CODE_0085F8:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $0085FF |
   ASL A                                     ; $008601 |
   TAX                                       ; $008602 |
-  JSR ($85DD,x)                             ; $008603 |
+  JSR (DATA_0085DD,x)                       ; $008603 |
   RTL                                       ; $008606 |
 
   TYX                                       ; $008607 |
@@ -1889,6 +1893,7 @@ CODE_008E29:
 CODE_008E2F:
   RTS                                       ; $008E2F |
 
+DATA_008E30:
   db $09, $07, $06, $03, $02, $01, $00      ; $008E30 |
 
 CODE_008E37:
@@ -1899,7 +1904,7 @@ CODE_008E37:
   BNE CODE_008E4F                           ; $008E42 |
   DEC $7E4C,x                               ; $008E44 |
   BMI CODE_008E55                           ; $008E47 |
-  LDA $8E2F,y                               ; $008E49 |
+  LDA DATA_008E30-1,y                       ; $008E49 |
   STA $7782,x                               ; $008E4C |
 
 CODE_008E4F:
@@ -1910,6 +1915,7 @@ CODE_008E55:
   REP #$20                                  ; $008E55 |
   RTS                                       ; $008E57 |
 
+DATA_008E58:
   db $06, $06, $06, $06, $04, $03           ; $008E58 |
 
 ambient_train_enter_track_ani:
@@ -1921,13 +1927,14 @@ ambient_train_enter_track_ani:
   DEY                                       ; $008E6B |
   BMI CODE_008E77                           ; $008E6C |
   DEC $73C2,x                               ; $008E6E |
-  LDA $8E58,y                               ; $008E71 |
+  LDA DATA_008E58,y                         ; $008E71 |
   STA $7782,x                               ; $008E74 |
 
 CODE_008E77:
   REP #$20                                  ; $008E77 |
   RTS                                       ; $008E79 |
 
+DATA_008E7A:
   db $06, $06, $05, $05                     ; $008E7A |
 
 ambient_train_transformation_smoke:
@@ -1942,7 +1949,7 @@ ambient_train_transformation_smoke:
   BMI CODE_008E9A                           ; $008E8E |
   TYA                                       ; $008E90 |
   STA $73C2,x                               ; $008E91 |
-  LDA $8E7A,y                               ; $008E94 |
+  LDA DATA_008E7A,y                         ; $008E94 |
   STA $7782,x                               ; $008E97 |
 
 CODE_008E9A:
@@ -2029,6 +2036,7 @@ CODE_008F27:
 CODE_008F2E:
   RTS                                       ; $008F2E |
 
+DATA_008F2F:
   db $02, $02, $02, $01, $01, $01, $03, $03 ; $008F2F |
   db $03, $02, $02, $02                     ; $008F37 |
 
@@ -2042,7 +2050,7 @@ ambient_snow_puff:
   LDY $7E4C,x                               ; $008F4A |
   LDA $8F34,y                               ; $008F4D |
   STA $7782,x                               ; $008F50 |
-  LDA $8F2E,y                               ; $008F53 |
+  LDA DATA_008F2F-1,y                       ; $008F53 |
   STA $73C2,x                               ; $008F56 |
 
 CODE_008F59:
@@ -2071,7 +2079,10 @@ CODE_008F6A:
 CODE_008F8A:
   RTS                                       ; $008F8A |
 
+DATA_008F8B:
   db $08, $07, $06, $05, $04, $03, $02, $01 ; $008F8B |
+
+DATA_008F93:
   db $40, $02, $02, $02, $02, $02, $02, $02 ; $008F93 |
 
 ambient_dr_freezegood_bop:
@@ -2082,16 +2093,19 @@ ambient_dr_freezegood_bop:
   BMI CODE_008FBB                           ; $008FA6 |
   SEP #$20                                  ; $008FA8 |
   LDY $7E4C,x                               ; $008FAA |
-  LDA $8F8B,y                               ; $008FAD |
+  LDA DATA_008F8B,y                         ; $008FAD |
   STA $73C2,x                               ; $008FB0 |
-  LDA $8F93,y                               ; $008FB3 |
+  LDA DATA_008F93,y                         ; $008FB3 |
   STA $7782,x                               ; $008FB6 |
   REP #$20                                  ; $008FB9 |
 
 CODE_008FBB:
   RTS                                       ; $008FBB |
 
+DATA_008FBC:
   db $0B, $0A, $09, $08, $07, $06, $05, $04 ; $008FBC |
+
+DATA_008FC4:
   db $03, $02, $01, $04, $04, $04, $04, $04 ; $008FC4 |
   db $04, $03, $03, $02, $02, $01           ; $008FCC |
 
@@ -2117,9 +2131,9 @@ CODE_008FE7:
   BMI CODE_009004                           ; $008FEF |
   SEP #$20                                  ; $008FF1 |
   LDY $7E4C,x                               ; $008FF3 |
-  LDA $8FBC,y                               ; $008FF6 |
+  LDA DATA_008FBC,y                         ; $008FF6 |
   STA $73C2,x                               ; $008FF9 |
-  LDA $8FC7,y                               ; $008FFC |
+  LDA DATA_008FC4+3,y                       ; $008FFC |
   STA $7782,x                               ; $008FFF |
   REP #$20                                  ; $009002 |
 
@@ -3065,11 +3079,17 @@ ambient_smoke_puff_3:
 CODE_009883:
   RTS                                       ; $009883 |
 
-  dw $002C, $003C, $0050, $0064             ; $009884 |
-  dw $0068, $000C, $000C, $0014             ; $00988C |
-  dw $0018, $001C, $0004, $0004             ; $009894 |
-  dw $0004, $0005, $0006, $0000             ; $00989C |
-  dw $0001, $0002, $0001, $0003             ; $0098A4 |
+DATA_009884:
+  dw $002C, $003C, $0050, $0064, $0068      ; $009884 |
+
+DATA_00988E:
+  dw $000C, $000C, $0014, $0018, $001C      ; $00988E |
+
+DATA_009898:
+  dw $0004, $0004, $0004, $0005, $0006      ; $009898 |
+
+DATA_0098A2:
+  dw $0000, $0001, $0002, $0001, $0003      ; $0098A2 |
 
 ambient_minigame_coin_cannon_puff:
   PHX                                       ; $0098AC |
@@ -3102,13 +3122,13 @@ ambient_minigame_coin_cannon_puff:
   BRA CODE_00990F                           ; $0098F2 |
 
 CODE_0098F4:
-  LDA $9884,y                               ; $0098F4 |
+  LDA DATA_009884,y                         ; $0098F4 |
   STA $78C0,x                               ; $0098F7 |
-  LDA $988E,y                               ; $0098FA |
+  LDA DATA_00988E,y                         ; $0098FA |
   STA $78C2,x                               ; $0098FD |
-  LDA $9898,y                               ; $009900 |
+  LDA DATA_009898,y                         ; $009900 |
   STA $7E8E,x                               ; $009903 |
-  LDA $98A2,y                               ; $009906 |
+  LDA DATA_0098A2,y                         ; $009906 |
   STA $73C2,x                               ; $009909 |
   LDA #$0003                                ; $00990C |
 
@@ -3456,7 +3476,9 @@ CODE_009BC7:
 CODE_009BDD:
   RTS                                       ; $009BDD |
 
+DATA_009BDE:
   db $08, $06, $04, $02, $02                ; $009BDE |
+
 
 ambient_colored_block_break_puff:
   JSR CODE_008AE5                           ; $009BE3 |
@@ -3470,7 +3492,7 @@ CODE_009BF3:
   SEP #$20                                  ; $009BF3 |
   DEC $73C2,x                               ; $009BF5 |
   LDY $7E4C,x                               ; $009BF8 |
-  LDA $9BDE,y                               ; $009BFB |
+  LDA DATA_009BDE,y                         ; $009BFB |
   STA $7782,x                               ; $009BFE |
   REP #$20                                  ; $009C01 |
   LDA #$0001                                ; $009C03 |
@@ -5423,7 +5445,7 @@ decompress_gfx_file:
   TAX                                       ; $00B513 |/
   LDA $0E                                   ; $00B514 |\
   BPL decompress_lc_lz1                     ; $00B516 | | VRAM destination address
-  LDA $AD70,y                               ; $00B518 | | being >= $8000 signifies
+  LDA scene_gfx_layout+3,y                  ; $00B518 | | being >= $8000 signifies
   STA $0A                                   ; $00B51B | | it is LC_LZ16 decompression instead
   INY                                       ; $00B51D | | we also have an extra word
   INY                                       ; $00B51E | | in the AD6D table,
@@ -5520,7 +5542,7 @@ CODE_00B5C4:
   PHA                                       ; $00B5D0 |
   PLB                                       ; $00B5D1 |
   REP #$20                                  ; $00B5D2 |
-  JSR ($B601,x)                             ; $00B5D4 |
+  JSR (DATA_00B601,x)                       ; $00B5D4 |
   SEP #$20                                  ; $00B5D7 |
   PLB                                       ; $00B5D9 |
   PLY                                       ; $00B5DA |
@@ -5543,8 +5565,13 @@ CODE_00B5FF:
   PLY                                       ; $00B5FF |
   RTS                                       ; $00B600 |
 
-  dw $B609, $B6B7, $B70B, $B609             ; $00B601 |
+DATA_00B601:
+  dw CODE_00B609                             ; $00B601 |
+  dw CODE_00B6B7                             ; $00B603 |
+  dw CODE_00B70B                             ; $00B605 |
+  dw CODE_00B609                             ; $00B607 |
 
+CODE_00B609:
   LDX #$0000                                ; $00B609 |
   LDY #$0000                                ; $00B60C |
 
@@ -5589,6 +5616,7 @@ CODE_00B60F:
   dw $4040, $4040, $4040, $4040             ; $00B6A7 |
   dw $4040, $4040, $4040, $4040             ; $00B6AF |
 
+CODE_00B6B7:
   LDA #$0000                                ; $00B6B7 |
   STA $04                                   ; $00B6BA |
   LDX #$B637                                ; $00B6BC |
@@ -5636,6 +5664,7 @@ CODE_00B6FC:
   STA $02                                   ; $00B708 |
   RTS                                       ; $00B70A |
 
+CODE_00B70B:
   PHB                                       ; $00B70B |
   PHK                                       ; $00B70C |
   PLB                                       ; $00B70D |
@@ -6743,24 +6772,33 @@ CODE_00C1DF:
   STA !reg_hdmaen                           ; $00C1E8 |
   RTS                                       ; $00C1EB |
 
+DATA_00C1EC:
   dw $4000, $6000, $4700, $6700             ; $00C1EC |
 
+DATA_00C1F4:
   dw $5180, $7180, $56DE, $56DE             ; $00C1F4 |
   dw $64DE, $64DE                           ; $00C1FC |
 
+DATA_00C200:
   dw $79DE, $79DE, $0E00, $0E00             ; $00C200 |
   dw $1500, $1500, $1500, $1500             ; $00C208 |
 
+DATA_00C210:
   db $63, $62                               ; $00C210 |
 
+DATA_00C212:
   db $3F, $BF                               ; $00C212 |
 
 DATA_00C214:
   db $00, $50, $28, $00, $00, $00           ; $00C214 |
   db $00, $00                               ; $00C21A |
 
+DATA_00C21C:
   db $01, $00, $01, $00, $01, $00, $00, $00 ; $00C21C |
+
+DATA_00C224:
   db $FF, $FF, $FF, $00, $01, $01, $01, $00 ; $00C224 |
+
 
 CODE_00C22C:
   LDY #$8F                                  ; $00C22C |\ Force blank
@@ -6797,11 +6835,11 @@ CODE_00C23B:
   ASL A                                     ; $00C276 |
   TAX                                       ; $00C277 |
   REP #$20                                  ; $00C278 |
-  LDA $7EC1E8,x                             ; $00C27A |
+  LDA.l rom_to_wram_rt($7E, DATA_00C1EC-4),x; $00C27A |
   STA !reg_vmadd                            ; $00C27E |
-  LDA $7EC1F4,x                             ; $00C281 |
+  LDA.l rom_to_wram_rt($7E, DATA_00C1F4),x  ; $00C281 |
   STA $4302                                 ; $00C285 |
-  LDA $7EC200,x                             ; $00C288 |
+  LDA.l rom_to_wram_rt($7E, DATA_00C200),x  ; $00C288 |
   STA $4305                                 ; $00C28C |
   LDX #$7F                                  ; $00C28F |
   STX $4304                                 ; $00C291 |
@@ -6846,7 +6884,7 @@ CODE_00C2A6:
   TCD                                       ; $00C2E6 |
   SEP #$20                                  ; $00C2E7 |
   LDY $0984                                 ; $00C2E9 |
-  LDA $C210,y                               ; $00C2EC |
+  LDA DATA_00C210,y                         ; $00C2EC |
   STA !reg_obsel                            ; $00C2EF |
   LDA !r_reg_tmw_mirror                     ; $00C2F2 |
   STA !reg_tmw                              ; $00C2F5 |
@@ -6924,7 +6962,7 @@ CODE_00C33E:
   PHK                                       ; $00C3B2 |
   PLB                                       ; $00C3B3 |
   LDY $0201                                 ; $00C3B4 |
-  LDX $C212,y                               ; $00C3B7 |
+  LDX DATA_00C212,y                         ; $00C3B7 |
   STX !r_reg_cgadsub_mirror                 ; $00C3BA |
   TYA                                       ; $00C3BD |
   ASL A                                     ; $00C3BE |
@@ -6935,11 +6973,11 @@ CODE_00C33E:
 CODE_00C3C3:
   DEC $0996,x                               ; $00C3C3 |
   BPL CODE_00C3E2                           ; $00C3C6 |
-  LDA $C21C,y                               ; $00C3C8 |
+  LDA DATA_00C21C,y                         ; $00C3C8 |
   STA $0996,x                               ; $00C3CB |
   LDA $0990,x                               ; $00C3CE |
   CLC                                       ; $00C3D1 |
-  ADC $C224,y                               ; $00C3D2 |
+  ADC DATA_00C224,y                         ; $00C3D2 |
   BPL CODE_00C3D9                           ; $00C3D5 |
   LDA #$00                                  ; $00C3D7 |
 
@@ -7772,12 +7810,15 @@ CODE_00CA10:
   JMP set_v_irq                             ; $00CA7D |
 
 ; vram address stuff?
+DATA_00CA80:
   dw $2000, $2000, $1000, $3000             ; $00CA80 |
   dw $0000, $4000                           ; $00CA88 |
 
+DATA_00CA8C:
   dw $96DE, $56DE, $76DE, $76DE             ; $00CA8C |
   dw $56DE, $96DE                           ; $00CA94 |
 
+DATA_00CA98:
   db $50, $52                               ; $00CA98 |
 
 irq_credits:
@@ -7799,11 +7840,11 @@ CODE_00CA9F:
   REP #$20                                  ; $00CAB7 |
   LDY #$80                                  ; $00CAB9 |
   STY !reg_vmain                            ; $00CABB |
-  LDA $7ECA7C,x                             ; $00CABE |
+  LDA.l rom_to_wram_rt($7E,DATA_00CA80-4),x ; $00CABE |
   STA !reg_vmadd                            ; $00CAC2 |
   LDA #$1801                                ; $00CAC5 |
   STA $4300                                 ; $00CAC8 |
-  LDA $7ECA88,x                             ; $00CACB |
+  LDA.l rom_to_wram_rt($7E,DATA_00CA8C-4),x ; $00CACB |
   STA $4302                                 ; $00CACF |
   LDA #$2000                                ; $00CAD2 |
   STA $4305                                 ; $00CAD5 |
@@ -7815,7 +7856,7 @@ CODE_00CA9F:
   DEC $0069                                 ; $00CAE4 |
   BNE CODE_00CAFC                           ; $00CAE7 |
   LDX $6D                                   ; $00CAE9 |
-  LDA $7ECA98,x                             ; $00CAEB |
+  LDA.l rom_to_wram_rt($7E,DATA_00CA98),x   ; $00CAEB |
   STA !reg_bg12nba                          ; $00CAEF |
   TXA                                       ; $00CAF2 |
   EOR #$01                                  ; $00CAF3 |
@@ -10120,8 +10161,13 @@ CODE_00E229:
   STY !gsu_scmr                             ; $00E230 |/ give SCPU ROM/RAM bus access
   RTL                                       ; $00E233 |
 
+DATA_00E234:
   dw $0064,$000A                            ; $00E234 |
+
+DATA_00E238:
   dw $000A,$FFF6                            ; $00E238 |
+
+DATA_00E23C:
   dw $012C,$0000                            ; $00E23C |
 
 CODE_00E240:
@@ -10160,14 +10206,14 @@ CODE_00E27D:
   STZ $03A9                                 ; $00E283 |
   LDA !r_stars_amount                       ; $00E286 |
   CLC                                       ; $00E289 |
-  ADC $E238,y                               ; $00E28A |
+  ADC DATA_00E238,y                         ; $00E28A |
   BMI CODE_00E297                           ; $00E28D |
   STA !r_stars_amount                       ; $00E28F |
-  CMP $E23C,y                               ; $00E292 |
+  CMP DATA_00E23C,y                         ; $00E292 |
   BCC CODE_00E2A3                           ; $00E295 |
 
 CODE_00E297:
-  LDA $E23C,y                               ; $00E297 |
+  LDA DATA_00E23C,y                         ; $00E297 |
   STA !r_stars_amount                       ; $00E29A |
   STZ !r_star_autoincrease                  ; $00E29D |
   JMP CODE_00E32C                           ; $00E2A0 |
@@ -10175,7 +10221,7 @@ CODE_00E297:
 CODE_00E2A3:
   LDA !r_star_autoincrease                  ; $00E2A3 |
   SEC                                       ; $00E2A6 |
-  SBC $E238,y                               ; $00E2A7 |
+  SBC DATA_00E238,y                         ; $00E2A7 |
   STA !r_star_autoincrease                  ; $00E2AA |
   TYA                                       ; $00E2AD |
   BNE CODE_00E2B3                           ; $00E2AE |
@@ -10246,9 +10292,9 @@ CODE_00E33D:
   LDY #$0000                                ; $00E33D |
 
 CODE_00E340:
-  CMP $E234,x                               ; $00E340 |
+  CMP DATA_00E234,x                         ; $00E340 |
   BCC CODE_00E34B                           ; $00E343 |
-  SBC $E234,x                               ; $00E345 |
+  SBC DATA_00E234,x                         ; $00E345 |
   INY                                       ; $00E348 |
   BRA CODE_00E340                           ; $00E349 |
 
@@ -10294,7 +10340,7 @@ prepare_tilemap_dma_queue_l:
 
 tilemap_dma_queue_pointers:
   dl $7E4002                                ; $00E383 | Default RAM queue
-  dl $008275                                ; $00E386 | empty
+  dl empty_tilemap_dma_queue_entry          ; $00E386 | empty
   dl $178008                                ; $00E389 | Island cutscene init
   dl $01E8F2                                ; $00E38C | BG3 tilemap init
   dl $01B62D                                ; $00E38F | Score screen BG1 tilemap inits
@@ -10327,11 +10373,14 @@ prepare_tilemap_dma_queue:
   STZ $0127                                 ; $00E3CA |\ Defalt Queue to RAM queue
   RTS                                       ; $00E3CD |/ And return
 
-; DMA queue address
+vram_dma_queue_pointer:
   dw $4800                                  ; $00E3CE |
 
-; DMA queue bank
-  db $7E,$2A,$B7,$11,$44,$B7,$11            ; $00E3D0 |
+vram_dma_queue_bank:
+  db $7E                                    ; $00E3D0 |
+
+DATA_00E3D1:
+  db $2A,$B7,$11,$44,$B7,$11                ; $00E3D1
 
 process_vram_dma_queue_l:
   PHB                                       ; $00E3D7 |
@@ -10345,8 +10394,8 @@ process_vram_dma_queue_l:
 process_vram_dma_queue:
   REP #$10                                  ; $00E3DF |
   LDX $0129                                 ; $00E3E1 | which queue (there's only 1, $7E4800)
-  LDY $E3CE,x                               ; $00E3E4 |\ DMA queue address
-  LDA $E3D0,x                               ; $00E3E7 |/ & bank ($7E4800)
+  LDY vram_dma_queue_pointer,x              ; $00E3E4 |\ DMA queue address
+  LDA vram_dma_queue_bank,x                 ; $00E3E7 |/ & bank ($7E4800)
   PHB                                       ; $00E3EA |\
   PHA                                       ; $00E3EB | | preserve & set data bank to $7E
   PLB                                       ; $00E3EC |/
@@ -11061,6 +11110,8 @@ buildtime:
 ; freespace, 11 bytes
   db $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF ; $00FFA5 |
   db $FF, $FF, $FF                          ; $00FFAD |
+padbyte $ff
+pad $ffb0
 
 ROMRegistration:
   db "01"                                   ; $00FFB0 | Maker code (Nintendo)

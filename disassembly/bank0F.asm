@@ -9233,7 +9233,7 @@ CODE_0FCC6F:
   LDA $11B8                                 ; $0FCC76 |
   ASL A                                     ; $0FCC79 |
   TAX                                       ; $0FCC7A |
-  JSR ($CC99,x)                             ; $0FCC7B |
+  JSR (DATA_00CC99,x)                       ; $0FCC7B |
   BRA CODE_0FCC83                           ; $0FCC7E |
 
 CODE_0FCC80:
@@ -9254,6 +9254,7 @@ CODE_0FCC96:
   SEP #$20                                  ; $0FCC96 |
   RTS                                       ; $0FCC98 |
 
+DATA_00CC99:
   dw $CCA7                                  ; $0FCC99 |
   dw $CCBC                                  ; $0FCC9B |
   dw $CCC0                                  ; $0FCC9D |
