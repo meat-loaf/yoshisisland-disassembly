@@ -282,7 +282,7 @@ init_oam:
   REP #$20                                  ; init_oam|
   LDX #$08                                  ; $00824D |\
   LDA #$BD16                                ; $00824F | | GSU: initialize OAM routine
-  JSL r_gsu_init_1                          ; $008252 |/
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $008252 |/
   SEP #$20                                  ; $008256 |
   RTL                                       ; $008258 |
 
@@ -290,7 +290,7 @@ init_oam_buffer:
   REP #$20                                  ; $008259 |
   LDX #$08                                  ; $00825B |
   LDA #$B1D8                                ; $00825D | gsu_init_oam_buffer
-  JSL r_gsu_init_1                          ; $008260 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $008260 |
   SEP #$20                                  ; $008264 |
   RTL                                       ; $008266 |
 
@@ -298,7 +298,7 @@ oam_high_buffer_to_table:
   REP #$20                                  ; $008267 |
   LDX #$08                                  ; $008269 |\
   LDA #$B289                                ; $00826B | | GSU: compress OAM high buffer into OAM high table routine
-  JSL r_gsu_init_1                          ; $00826E |/
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00826E |/
   SEP #$20                                  ; $008272 |
   RTL                                       ; $008274 |
 
@@ -1139,7 +1139,7 @@ CODE_008870:
   STA !gsu_r10                              ; $0088B4 |
   LDX #$0B                                  ; $0088B7 |
   LDA #$860A                                ; $0088B9 |
-  JSL r_gsu_init_1                          ; $0088BC |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $0088BC |  GSU init
   LDX $12                                   ; $0088C0 |
   LDY !gsu_r1                               ; $0088C2 |
   BNE CODE_0088F5                           ; $0088C5 |
@@ -2691,7 +2691,7 @@ CODE_009446:
   PHX                                       ; $009469 |
   LDX #$09                                  ; $00946A |
   LDA #$F5F4                                ; $00946C |
-  JSL r_gsu_init_1                          ; $00946F |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00946F |  GSU init
   PLX                                       ; $009473 |
 
 CODE_009474:
@@ -2950,7 +2950,7 @@ ambient_ice_shards:
   STA !gsu_r14                              ; $009657 |  r14
   LDX #$09                                  ; $00965A |
   LDA #$8CB1                                ; $00965C |
-  JSL r_gsu_init_1                          ; $00965F |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00965F |  GSU init
   PLX                                       ; $009663 |
   JSR CODE_008AE5                           ; $009664 |
   LDA $7782,x                               ; $009667 |
@@ -3087,7 +3087,7 @@ ambient_minigame_coin_cannon_puff:
   STA !gsu_r6                               ; $0098CE |  r6
   LDX #$08                                  ; $0098D1 |
   LDA #$9287                                ; $0098D3 |
-  JSL r_gsu_init_1                          ; $0098D6 |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $0098D6 |  GSU init
   PLX                                       ; $0098DA |
   JSR CODE_008AE5                           ; $0098DB |
   LDA $7E8E,x                               ; $0098DE |
@@ -3498,7 +3498,7 @@ CODE_009C1D:
   STA !gsu_r14                              ; $009C2E |  r14
   LDX #$09                                  ; $009C31 |
   LDA #$8CB1                                ; $009C33 |
-  JSL r_gsu_init_1                          ; $009C36 |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $009C36 |  GSU init
   PLX                                       ; $009C3A |
   JSR CODE_008AE5                           ; $009C3B |
   LDA $7782,x                               ; $009C3E |
@@ -3624,7 +3624,7 @@ ambient_break_stone_block_smoke_puff:
   STA !gsu_r14                              ; $009EA3 |  r14
   LDX #$09                                  ; $009EA6 |
   LDA #$8CB1                                ; $009EA8 |
-  JSL r_gsu_init_1                          ; $009EAB |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $009EAB |  GSU init
   PLX                                       ; $009EAF |
   JSR CODE_008AE5                           ; $009EB0 |
   LDA $7782,x                               ; $009EB3 |
@@ -3769,7 +3769,7 @@ ambient_feather_like:
   STA !gsu_r14                              ; $00A1A1 |  r14
   LDX #$09                                  ; $00A1A4 |
   LDA #$8CB1                                ; $00A1A6 |
-  JSL r_gsu_init_1                          ; $00A1A9 |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00A1A9 |  GSU init
   PLX                                       ; $00A1AD |
   JSR CODE_008AE5                           ; $00A1AE |
   LDA $7782,x                               ; $00A1B1 |
@@ -3984,7 +3984,7 @@ ambient_snow_falling:
   STA !gsu_r14                              ; $00A5AB |
   LDX #$09                                  ; $00A5AE |
   LDA #$8CB1                                ; $00A5B0 |
-  JSL r_gsu_init_1                          ; $00A5B3 |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00A5B3 |  GSU init
   PLX                                       ; $00A5B7 |
   JSR CODE_008AE5                           ; $00A5B8 |
   LDA $7782,x                               ; $00A5BB |
@@ -4287,7 +4287,7 @@ ambient_baby_bowser_egg_explosion:
   STA !gsu_r14                              ; $00A859 |
   LDX #$09                                  ; $00A85C |
   LDA #$8CB1                                ; $00A85E |
-  JSL r_gsu_init_1                          ; $00A861 |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00A861 |  GSU init
   LDX $00                                   ; $00A865 |
   LDA #$0004                                ; $00A867 |
   STA !gsu_r7                               ; $00A86A |
@@ -4301,7 +4301,7 @@ ambient_baby_bowser_egg_explosion:
   STA !gsu_r5                               ; $00A882 |
   LDX #$09                                  ; $00A885 |
   LDA #$F5F4                                ; $00A887 |
-  JSL r_gsu_init_1                          ; $00A88A |  GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00A88A |  GSU init
   LDX $00                                   ; $00A88E |
 
 CODE_00A890:
@@ -5441,7 +5441,7 @@ decompress_gfx_file:
   SEP #$10                                  ; $00B53A |
   LDX.b #(gsu_decompress_lc_lz16>>16)       ; $00B53C |
   LDA #gsu_decompress_lc_lz16               ; $00B53E |
-  JSL r_gsu_init_1                          ; $00B541 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00B541 |
   REP #$10                                  ; $00B545 |
   LDY $0A                                   ; $00B547 |
   SEP #$20                                  ; $00B549 |
@@ -5461,7 +5461,7 @@ decompress_lc_lz1:
   SEP #$10                                  ; $00B565 |
   LDX.b #(gsu_decompress_lc_lz1>>16)        ; $00B567 |
   LDA #gsu_decompress_lc_lz1                ; $00B569 |
-  JSL r_gsu_init_1                          ; $00B56C |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00B56C |
   REP #$10                                  ; $00B570 |
   LDA !gsu_r10                              ; $00B572 |\  returns r10 as end
   SEC                                       ; $00B575 | | end - start = size
@@ -5693,7 +5693,7 @@ decompress_lc_lz1_l:
   SEP #$10                                  ; $00B775 |\
   LDX.b #(gsu_decompress_lc_lz1>>16)        ; $00B777 | | gsu_decompress_lc_lz1
   LDA #gsu_decompress_lc_lz1                ; $00B779 | |
-  JSL r_gsu_init_1                          ; $00B77C |/
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00B77C |/
   REP #$10                                  ; $00B780 |
   LDA !gsu_r10                              ; $00B782 |\  returns r10 as end
   SEC                                       ; $00B785 | | end - start = size
@@ -7385,7 +7385,7 @@ CODE_00C71E:
   REP #$20                                  ; $00C732 |
   LDX.b #(copy_oam_buffer>>16)              ; $00C734 |
   LDA #copy_oam_buffer                      ; $00C736 |
-  JSL r_gsu_init_1                          ; $00C739 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00C739 | GSU init
   INC $0D23                                 ; $00C73D |
   INC $0D25                                 ; $00C740 |
   LDA $0D25                                 ; $00C743 |
@@ -7435,7 +7435,7 @@ CODE_00C778:
   STA !gsu_r8                               ; $00C7A0 |
   LDX.b #(CODE_09E92F>>16)                  ; $00C7A3 |
   LDA #CODE_09E92F                          ; $00C7A5 |
-  JSL r_gsu_init_1                          ; $00C7A8 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $00C7A8 | GSU init
   LDA !gsu_r11                              ; $00C7AC |
   STA $0D21                                 ; $00C7AF |
   LDA !gsu_r8                               ; $00C7B2 |
@@ -9574,7 +9574,6 @@ CODE_00DE18:
 CODE_00DE43:
   RTS                                       ; $00DE43 |
 
-r_gsu_init_1 = $7EDE44
 gsu_init_1:
   STZ !gsu_sfr                              ; $00DE44 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE47 |\ set SCBR
@@ -9592,7 +9591,6 @@ CODE_00DE5C:
   STY !gsu_scmr                             ; $00DE63 |/
   RTL                                       ; $00DE66 |
 
-r_gsu_init_2 = $7EDE67
 gsu_init_2:
   PHB                                       ; $00DE67 |  preserve bank
   STZ !gsu_sfr                              ; $00DE68 |  nuke GSU status/flag register
@@ -9615,7 +9613,6 @@ CODE_00DE86:
   STY !gsu_scmr                             ; $00DE8D |/
   RTL                                       ; $00DE90 |
 
-r_gsu_init_3 = $7EDE91
 gsu_init_3:
   STZ !gsu_sfr                              ; $00DE91 |  nuke GSU status/flag register
   LDY $012D                                 ; $00DE94 |\ set SCBR
@@ -9646,7 +9643,6 @@ CODE_00DEC6:
   SEP #$10                                  ; $00DECC |
   RTL                                       ; $00DECE |
 
-r_gsu_init_4 = $7EDECF
 gsu_init_4:
   STZ !gsu_sfr                              ; $00DECF |  nuke GSU status/flag register
   LDY $012D                                 ; $00DED2 |\ set SCBR
@@ -9984,7 +9980,6 @@ CODE_00E14E:
   PLY                                       ; $00E150 |
   RTS                                       ; $00E151 |
 
-r_gsu_init_5 = $7EE152
 gsu_init_5:
   PHB                                       ; $00E152 |  preserve bank
   STZ !gsu_sfr                              ; $00E153 |  nuke status/flag register

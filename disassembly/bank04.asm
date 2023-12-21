@@ -17,7 +17,7 @@ init_melon:
   STA !gsu_r0                               ; $04801A |
   LDX #$0A                                  ; $04801D |
   LDA #$CE2F                                ; $04801F |
-  JSL r_gsu_init_3                          ; $048022 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_3)        ; $048022 | GSU init
   LDX $12                                   ; $048026 |
   LDA !gsu_r7                               ; $048028 |
   AND #$0003                                ; $04802B |
@@ -252,7 +252,7 @@ CODE_0481ED:
   STA $6000                                 ; $0481EE |
   LDX #$09                                  ; $0481F1 |
   LDA #$8D5E                                ; $0481F3 |
-  JSL r_gsu_init_1                          ; $0481F6 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $0481F6 | GSU init
   LDY $6000                                 ; $0481FA |
   BPL CODE_04820C                           ; $0481FD |
   LDX $12                                   ; $0481FF |
@@ -425,7 +425,7 @@ CODE_048311:
   SEP #$10                                  ; $04831B |
   LDX #$08                                  ; $04831D |
   LDA #$867E                                ; $04831F |
-  JSL r_gsu_init_1                          ; $048322 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $048322 | GSU init
   INC $0CF9                                 ; $048326 |
   LDX $12                                   ; $048329 |
   RTL                                       ; $04832B |
@@ -498,7 +498,7 @@ CODE_0483B8:
   STA !gsu_r1                               ; $0483BE |
   LDX #$09                                  ; $0483C1 |
   LDA #$9011                                ; $0483C3 |
-  JSL r_gsu_init_1                          ; $0483C6 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $0483C6 | GSU init
 
 CODE_0483CA:
   LDX $12                                   ; $0483CA |
@@ -567,7 +567,7 @@ CODE_048441:
   STA !gsu_r1                               ; $048442 |
   LDX #$09                                  ; $048445 |
   LDA #$9011                                ; $048447 |
-  JSL r_gsu_init_1                          ; $04844A | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04844A | GSU init
 
 CODE_04844E:
   LDX $12                                   ; $04844E |
@@ -782,7 +782,7 @@ CODE_0485E5:
   STA !gsu_r1                               ; $0485E6 |
   LDX #$09                                  ; $0485E9 |
   LDA #$9011                                ; $0485EB |
-  JSL r_gsu_init_1                          ; $0485EE | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $0485EE | GSU init
   LDX $12                                   ; $0485F2 |
   LDY !gsu_r14                              ; $0485F4 |
   BMI CODE_048654                           ; $0485F7 |
@@ -1599,7 +1599,7 @@ CODE_048BDF:
   STA !gsu_r1                               ; $048BE0 |
   LDX #$09                                  ; $048BE3 |
   LDA #$9011                                ; $048BE5 |
-  JSL r_gsu_init_1                          ; $048BE8 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $048BE8 | GSU init
 
 CODE_048BEC:
   LDX $12                                   ; $048BEC |
@@ -1614,7 +1614,7 @@ CODE_048BF5:
 CODE_048BF6:
   LDX #$09                                  ; $048BF6 |
   LDA !gsu_r15                              ; $048BF8 |
-  JSL r_gsu_init_1                          ; $048BFB | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $048BFB | GSU init
   BRA CODE_048BEC                           ; $048BFF |
 
 ; branched to from above
@@ -2001,7 +2001,7 @@ CODE_048EE1:
   STA !gsu_r2                               ; $048EFD |
   LDX #$08                                  ; $048F00 |
   LDA #$867E                                ; $048F02 |
-  JSL r_gsu_init_1                          ; $048F05 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $048F05 | GSU init
   LDX $12                                   ; $048F09 |
   INC $0CF9                                 ; $048F0B |
 
@@ -2133,7 +2133,7 @@ CODE_048FCF:
 CODE_048FF4:
   LDX #$09                                  ; $048FF4 |
   LDA #$9204                                ; $048FF6 |
-  JSL r_gsu_init_1                          ; $048FF9 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $048FF9 | GSU init
   LDX $12                                   ; $048FFD |
   LDA !gsu_r6                               ; $048FFF |
   CMP #$0007                                ; $049002 |
@@ -2368,7 +2368,7 @@ CODE_0491D0:
   STA !gsu_r0                               ; $0491E6 |
   LDX #$0B                                  ; $0491E9 |
   LDA #$86B6                                ; $0491EB |
-  JSL r_gsu_init_1                          ; $0491EE | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $0491EE | GSU init
   LDX $12                                   ; $0491F2 |
   LDY !s_spr_facing_dir,x                   ; $0491F4 |
   LDA $9198,y                               ; $0491F7 |
@@ -2684,7 +2684,7 @@ CODE_049439:
   STA !gsu_r2                               ; $04946F |
   LDX #$08                                  ; $049472 |
   LDA #$D76B                                ; $049474 |
-  JSL r_gsu_init_1                          ; $049477 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $049477 | GSU init
   LDX $12                                   ; $04947B |
   INC $0CF9                                 ; $04947D |
   RTS                                       ; $049480 |
@@ -3723,7 +3723,7 @@ CODE_049C87:
   STA !gsu_r1                               ; $049C88 |
   LDX #$09                                  ; $049C8B |
   LDA #$8E44                                ; $049C8D |
-  JSL r_gsu_init_1                          ; $049C90 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $049C90 | GSU init
   LDX $12                                   ; $049C94 |
   LDY !gsu_r1                               ; $049C96 |
   BMI CODE_049CB2                           ; $049C99 |
@@ -4517,7 +4517,7 @@ CODE_04A280:
   STA !gsu_r1                               ; $04A28E |
   LDX #$0B                                  ; $04A291 |
   LDA #$8595                                ; $04A293 |
-  JSL r_gsu_init_1                          ; $04A296 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04A296 | GSU init
   LDX $12                                   ; $04A29A |
   LDA !gsu_r1                               ; $04A29C |
   EOR #$FFFF                                ; $04A29F |
@@ -4633,7 +4633,7 @@ CODE_04A372:
   BCC CODE_04A3A0                           ; $04A379 |
   LDX #$08                                  ; $04A37B |
   LDA #$D46A                                ; $04A37D |
-  JSL r_gsu_init_1                          ; $04A380 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04A380 | GSU init
   REP #$10                                  ; $04A384 |
   JSL CODE_00BE39                           ; $04A386 |
 
@@ -4811,7 +4811,7 @@ main_plank_bg3:
   STA $0DFB                                 ; $04A4E3 |
   LDX #$08                                  ; $04A4E6 |
   LDA #$D46A                                ; $04A4E8 |
-  JSL r_gsu_init_1                          ; $04A4EB | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04A4EB | GSU init
   LDX $12                                   ; $04A4EF |
 
 CODE_04A4F1:
@@ -4916,7 +4916,7 @@ CODE_04A586:
   STA !gsu_r12                              ; $04A5DF |
   LDX #$08                                  ; $04A5E2 |
   LDA #$D486                                ; $04A5E4 |
-  JSL r_gsu_init_1                          ; $04A5E7 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04A5E7 |
   DEC $0DFB                                 ; $04A5EB |
   BNE CODE_04A5F4                           ; $04A5EE |
   JSL $04A50E                               ; $04A5F0 |
@@ -5354,7 +5354,7 @@ CODE_04A8FF:
   STA !gsu_r1                               ; $04A912 |
   LDX #$0B                                  ; $04A915 |
   LDA #$BCF8                                ; $04A917 |
-  JSL r_gsu_init_1                          ; $04A91A |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04A91A |
   LDX $12                                   ; $04A91E |
   LDA !gsu_r0                               ; $04A920 |
   STA !s_spr_x_accel_ceiling,x              ; $04A923 |
@@ -5406,7 +5406,7 @@ CODE_04A959:
   STA !gsu_r6                               ; $04A981 |
   LDX #$0B                                  ; $04A984 |
   LDA #$8595                                ; $04A986 |
-  JSL r_gsu_init_1                          ; $04A989 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04A989 | GSU init
   LDX $12                                   ; $04A98D |
   LDA !gsu_r0                               ; $04A98F |
   CLC                                       ; $04A992 |
@@ -5479,7 +5479,7 @@ CODE_04A9FC:
   STA $601E                                 ; $04AA0F |
   LDX #$0B                                  ; $04AA12 |
   LDA #$89E9                                ; $04AA14 |
-  JSL r_gsu_init_1                          ; $04AA17 | gsu
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04AA17 | gsu
   LDX $12                                   ; $04AA1B |
   LDA $601E                                 ; $04AA1D |
   STA !s_spr_x_accel_ceiling,x              ; $04AA20 |
@@ -5529,7 +5529,7 @@ CODE_04AA6A:
   STA !gsu_r1                               ; $04AA7D |
   LDX #$0B                                  ; $04AA80 |
   LDA #$BCF8                                ; $04AA82 |
-  JSL r_gsu_init_1                          ; $04AA85 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04AA85 |
   LDX $12                                   ; $04AA89 |
   LDA !gsu_r0                               ; $04AA8B |
   STA !s_spr_x_accel_ceiling,x              ; $04AA8E |
@@ -5552,7 +5552,7 @@ CODE_04AAA2:
   STA $601E                                 ; $04AAA9 |
   LDX #$0B                                  ; $04AAAC |
   LDA #$89E9                                ; $04AAAE |
-  JSL r_gsu_init_1                          ; $04AAB1 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04AAB1 |
   LDX $12                                   ; $04AAB5 |
   LDA $601E                                 ; $04AAB7 |
   STA !s_spr_x_accel_ceiling,x              ; $04AABA |
@@ -5579,7 +5579,7 @@ CODE_04AAC3:
   STA !gsu_r6                               ; $04AAE0 |
   LDX #$0B                                  ; $04AAE3 |
   LDA #$8595                                ; $04AAE5 |
-  JSL r_gsu_init_1                          ; $04AAE8 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04AAE8 |
   LDX $12                                   ; $04AAEC |
   LDA !gsu_r0                               ; $04AAEE |
   CLC                                       ; $04AAF1 |
@@ -5653,7 +5653,7 @@ CODE_04AB69:
   STA !gsu_r0                               ; $04AB78 |
   LDX #$0B                                  ; $04AB7B |
   LDA #$86B6                                ; $04AB7D |
-  JSL r_gsu_init_1                          ; $04AB80 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04AB80 |
   LDX $12                                   ; $04AB84 |
   LDA $608B                                 ; $04AB86 |
   AND #$FF00                                ; $04AB89 |
@@ -5701,7 +5701,7 @@ CODE_04ABC6:
   STA !gsu_r6                               ; $04ABD3 |
   LDX #$0B                                  ; $04ABD6 |
   LDA #$8595                                ; $04ABD8 |
-  JSL r_gsu_init_1                          ; $04ABDB |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04ABDB |
   LDX $12                                   ; $04ABDF |
   LDA !gsu_r1                               ; $04ABE1 |
   BPL CODE_04ABE7                           ; $04ABE4 |
@@ -5792,7 +5792,7 @@ CODE_04AC61:
   STA !gsu_r2                               ; $04AC8A |
   LDX #$08                                  ; $04AC8D |
   LDA #$8205                                ; $04AC8F |
-  JSL r_gsu_init_1                          ; $04AC92 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04AC92 |
   LDX $12                                   ; $04AC96 |
   INC $0CF9                                 ; $04AC98 |
   RTS                                       ; $04AC9B |
@@ -5855,7 +5855,7 @@ CODE_04AD09:
   STA !gsu_r6                               ; $04AD16 |
   LDX #$0B                                  ; $04AD19 |
   LDA #$855B                                ; $04AD1B |
-  JSL r_gsu_init_1                          ; $04AD1E |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04AD1E |
   LDX $12                                   ; $04AD22 |
   PHX                                       ; $04AD24 |
   LDA !s_spr_dyntile_index,x                ; $04AD25 |
@@ -6076,7 +6076,7 @@ CODE_04AE9D:
   STA !gsu_r2                               ; $04AEC5 |
   LDX #$08                                  ; $04AEC8 |
   LDA #$8205                                ; $04AECA |
-  JSL r_gsu_init_1                          ; $04AECD | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04AECD | GSU init
   LDX $12                                   ; $04AED1 |
   INC $0CF9                                 ; $04AED3 |
   RTL                                       ; $04AED6 |
@@ -6180,7 +6180,7 @@ CODE_04AF4D:
   PLX                                       ; $04AF91 |
   LDX #$0B                                  ; $04AF92 |
   LDA #$8500                                ; $04AF94 |
-  JSL r_gsu_init_1                          ; $04AF97 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04AF97 | GSU init
   LDX $12                                   ; $04AF9B |
   RTS                                       ; $04AF9D |
 
@@ -6284,7 +6284,7 @@ CODE_04B022:
   STA !gsu_r6                               ; $04B05D |
   LDX #$0B                                  ; $04B060 |
   LDA #$8595                                ; $04B062 |
-  JSL r_gsu_init_1                          ; $04B065 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B065 | GSU init
   LDX $12                                   ; $04B069 |
   LDA !gsu_r1                               ; $04B06B |
   CLC                                       ; $04B06E |
@@ -6512,7 +6512,7 @@ CODE_04B1D5:
   STA !gsu_r6                               ; $04B200 |
   LDX #$0B                                  ; $04B203 |
   LDA #$86B6                                ; $04B205 |
-  JSL r_gsu_init_1                          ; $04B208 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B208 | GSU init
   LDX $12                                   ; $04B20C |
   LDA !gsu_r0                               ; $04B20E |
   STZ !s_player_y_speed                     ; $04B211 |
@@ -6569,7 +6569,7 @@ CODE_04B25C:
   STA !gsu_r6                               ; $04B25F |
   LDX #$0B                                  ; $04B262 |
   LDA #$86B6                                ; $04B264 |
-  JSL r_gsu_init_1                          ; $04B267 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B267 | GSU init
   LDX $12                                   ; $04B26B |
   LDA !gsu_r0                               ; $04B26D |
 
@@ -6645,7 +6645,7 @@ CODE_04B2CF:
   STA $6042                                 ; $04B2F5 |
   LDX #$08                                  ; $04B2F8 |
   LDA #$E447                                ; $04B2FA |
-  JSL r_gsu_init_1                          ; $04B2FD | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B2FD | GSU init
   REP #$10                                  ; $04B301 |
   JSL CODE_00BE39                           ; $04B303 |
 
@@ -6831,7 +6831,7 @@ CODE_04B44C:
   STA $703370                               ; $04B47B |
   LDX #$08                                  ; $04B47F |
   LDA #$B4A9                                ; $04B481 |
-  JSL r_gsu_init_1                          ; $04B484 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B484 | GSU init
   LDX $12                                   ; $04B488 |
 
 CODE_04B48A:
@@ -6978,7 +6978,7 @@ CODE_04B54C:
   STA !gsu_r10                              ; $04B593 |
   LDX #$08                                  ; $04B596 |
   LDA #$A248                                ; $04B598 |
-  JSL r_gsu_init_1                          ; $04B59B | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B59B | GSU init
   LDX $12                                   ; $04B59F |
   RTS                                       ; $04B5A1 |
 
@@ -7007,7 +7007,7 @@ CODE_04B5A2:
   STA $600C                                 ; $04B5DB |
   LDX #$08                                  ; $04B5DE |
   LDA #$E315                                ; $04B5E0 |
-  JSL r_gsu_init_1                          ; $04B5E3 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B5E3 | GSU init
   REP #$10                                  ; $04B5E7 |
   JSL CODE_00BE39                           ; $04B5E9 |
 
@@ -7026,7 +7026,7 @@ CODE_04B5A2:
 CODE_04B601:
   LDX #$08                                  ; $04B601 |
   LDA #$D46A                                ; $04B603 |
-  JSL r_gsu_init_1                          ; $04B606 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B606 | GSU init
   REP #$10                                  ; $04B60A |
   JSL CODE_00BE39                           ; $04B60C |
 
@@ -7225,7 +7225,7 @@ CODE_04B748:
   STA !gsu_r6                               ; $04B752 |
   LDX #$0B                                  ; $04B755 |
   LDA #$86B6                                ; $04B757 |
-  JSL r_gsu_init_1                          ; $04B75A | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B75A | GSU init
   LDX $12                                   ; $04B75E |
   LDA #$0100                                ; $04B760 |
   SEC                                       ; $04B763 |
@@ -7314,7 +7314,7 @@ CODE_04B7CC:
   STA !gsu_r2                               ; $04B7FB |
   LDX #$08                                  ; $04B7FE |
   LDA #$8295                                ; $04B800 |
-  JSL r_gsu_init_1                          ; $04B803 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B803 | GSU init
   RTS                                       ; $04B807 |
 
 ; bigger boo sub
@@ -7350,7 +7350,7 @@ CODE_04B82E:
   STA !gsu_r1                               ; $04B82F |
   LDX #$09                                  ; $04B832 |
   LDA #$8F33                                ; $04B834 |
-  JSL r_gsu_init_1                          ; $04B837 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B837 | GSU init
   LDX $12                                   ; $04B83B |
   LDY !gsu_r1                               ; $04B83D |
   BMI CODE_04B82D                           ; $04B840 |
@@ -7437,7 +7437,7 @@ CODE_04B8E4:
   STA !gsu_r0                               ; $04B8ED |
   LDX #$0B                                  ; $04B8F0 |
   LDA #$86B6                                ; $04B8F2 |
-  JSL r_gsu_init_1                          ; $04B8F5 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B8F5 | GSU init
   LDX $12                                   ; $04B8F9 |
   LDA !gsu_r0                               ; $04B8FB |
   STA !s_spr_hitbox_width,x                 ; $04B8FE |
@@ -7503,7 +7503,7 @@ CODE_04B942:
   STA !gsu_r12                              ; $04B962 |
   LDX #$08                                  ; $04B965 |
   LDA #$E167                                ; $04B967 |
-  JSL r_gsu_init_1                          ; $04B96A | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B96A | GSU init
   BRA CODE_04B9B2                           ; $04B96E |
 
 CODE_04B970:
@@ -7517,7 +7517,7 @@ CODE_04B970:
   STA !gsu_r12                              ; $04B985 |
   LDX #$08                                  ; $04B988 |
   LDA #$E167                                ; $04B98A |
-  JSL r_gsu_init_1                          ; $04B98D | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B98D | GSU init
   LDA #$E894                                ; $04B991 |
   STA !gsu_r14                              ; $04B994 |
   LDA #$005F                                ; $04B997 |
@@ -7528,7 +7528,7 @@ CODE_04B970:
   STA !gsu_r12                              ; $04B9A6 |
   LDX #$08                                  ; $04B9A9 |
   LDA #$E167                                ; $04B9AB |
-  JSL r_gsu_init_1                          ; $04B9AE | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04B9AE | GSU init
 
 CODE_04B9B2:
   LDX $12                                   ; $04B9B2 |
@@ -7727,7 +7727,7 @@ CODE_04BAF4:
   STA $703370                               ; $04BB0A |
   LDX #$08                                  ; $04BB0E |
   LDA #$B4A9                                ; $04BB10 |
-  JSL r_gsu_init_1                          ; $04BB13 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04BB13 | GSU init
   LDX $12                                   ; $04BB17 |
 
 CODE_04BB19:
@@ -7903,7 +7903,7 @@ bigger_boo_intro_darken:
   STA $703370                               ; $04BC5C |
   LDX #$08                                  ; $04BC60 |
   LDA #$B4A9                                ; $04BC62 |
-  JSL r_gsu_init_1                          ; $04BC65 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04BC65 | GSU init
   LDX $12                                   ; $04BC69 |
   RTS                                       ; $04BC6B |
 
@@ -7959,7 +7959,7 @@ CODE_04BCA0:
   STA !gsu_r6                               ; $04BCE3 |
   LDX #$0B                                  ; $04BCE6 |
   LDA #$86B6                                ; $04BCE8 |
-  JSL r_gsu_init_1                          ; $04BCEB | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04BCEB | GSU init
   LDX $12                                   ; $04BCEF |
   LDA #$0100                                ; $04BCF1 |
   SEC                                       ; $04BCF4 |
@@ -8461,7 +8461,7 @@ CODE_04C456:
   STA !gsu_r1                               ; $04C45A |
   LDX #$0B                                  ; $04C45D |
   LDA #$85D0                                ; $04C45F |
-  JSL r_gsu_init_1                          ; $04C462 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04C462 | GSU init
   LDX $12                                   ; $04C466 |
   LDA !s_spr_id,x                           ; $04C468 |
   CMP #$015E                                ; $04C46B |
@@ -8613,7 +8613,7 @@ CODE_04C574:
   STA $603E                                 ; $04C59D |
   LDX #$0A                                  ; $04C5A0 |
   LDA #$E864                                ; $04C5A2 |
-  JSL r_gsu_init_3                          ; $04C5A5 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_3)        ; $04C5A5 | GSU init
   LDX $12                                   ; $04C5A9 |
   LDA !gsu_r1                               ; $04C5AB |
   STA $7860,x                               ; $04C5AE |
@@ -8886,7 +8886,7 @@ CODE_04C776:
   STA !gsu_r6                               ; $04C79D |
   LDX #$0B                                  ; $04C7A0 |
   LDA #$8595                                ; $04C7A2 |
-  JSL r_gsu_init_1                          ; $04C7A5 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04C7A5 | GSU init
   LDX $12                                   ; $04C7A9 |
   LDA !gsu_r0                               ; $04C7AB |
   INC A                                     ; $04C7AE |
@@ -9896,7 +9896,7 @@ CODE_04CF1A:
   STA !gsu_r2                               ; $04CF60 |
   LDX #$08                                  ; $04CF63 |
   LDA #$D69F                                ; $04CF65 |
-  JSL r_gsu_init_1                          ; $04CF68 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04CF68 | GSU init
   LDX $12                                   ; $04CF6C |
   INC $0CF9                                 ; $04CF6E |
   RTS                                       ; $04CF71 |
@@ -10150,7 +10150,7 @@ CODE_04D0FF:
   STA $6002                                 ; $04D162 |
   LDX #$09                                  ; $04D165 |
   LDA #$9253                                ; $04D167 |
-  JSL r_gsu_init_1                          ; $04D16A | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04D16A | GSU init
   LDX $12                                   ; $04D16E |
   JSL despawn_sprite_free_slot              ; $04D170 |
   RTS                                       ; $04D174 |
@@ -10351,7 +10351,7 @@ CODE_04D2D7:
   STA !gsu_r6                               ; $04D2DE |
   LDX #$0B                                  ; $04D2E1 |
   LDA #$86B6                                ; $04D2E3 |
-  JSL r_gsu_init_1                          ; $04D2E6 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04D2E6 | GSU init
   LDX $12                                   ; $04D2EA |
   LDA !gsu_r0                               ; $04D2EC |
   LDY !s_spr_gsu_morph_2_hi,x               ; $04D2EF |
@@ -10629,7 +10629,7 @@ CODE_04D4E7:
   STA !gsu_r2                               ; $04D529 |
   LDX #$08                                  ; $04D52C |
   LDA #$D69F                                ; $04D52E |
-  JSL r_gsu_init_1                          ; $04D531 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04D531 | GSU init
   LDX $12                                   ; $04D535 |
   INC $0CF9                                 ; $04D537 |
   RTS                                       ; $04D53A |
@@ -10711,7 +10711,7 @@ CODE_04D5BC:
   STA !gsu_r6                               ; $04D5C2 |
   LDX #$0B                                  ; $04D5C5 |
   LDA #$8595                                ; $04D5C7 |
-  JSL r_gsu_init_1                          ; $04D5CA | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04D5CA | GSU init
   LDX $12                                   ; $04D5CE |
   LDY !s_spr_wildcard_4_lo_dp,x             ; $04D5D0 |
   LDA !gsu_r1                               ; $04D5D2 |
@@ -11988,7 +11988,7 @@ CODE_04DF8E:
 CODE_04DFC5:
   LDX #$0B                                  ; $04DFC5 |
   LDA #$C70A                                ; $04DFC7 |
-  JSL r_gsu_init_1                          ; $04DFCA | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04DFCA | GSU init
   REP #$10                                  ; $04DFCE |
   LDA !s_player_y_cam_rel                   ; $04DFD0 |
   CMP #$0120                                ; $04DFD3 |
@@ -12104,7 +12104,7 @@ CODE_04E0BB:
   SEP #$10                                  ; $04E0BF |
   LDX #$0B                                  ; $04E0C1 |
   LDA #$C703                                ; $04E0C3 |
-  JSL r_gsu_init_1                          ; $04E0C6 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E0C6 | GSU init
   LDA #$0100                                ; $04E0CA |
   STA !s_player_joy1_lo                     ; $04E0CD |
   LDA !s_player_x_cam_rel                   ; $04E0D0 |
@@ -12133,7 +12133,7 @@ CODE_04E0FC:
   INC !s_player_dir_last_accel              ; $04E0FC |
   LDX #$0B                                  ; $04E0FF |
   LDA #$C6EF                                ; $04E101 |
-  JSL r_gsu_init_4                          ; $04E104 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_4)        ; $04E104 | GSU init
   REP #$10                                  ; $04E108 |
   RTS                                       ; $04E10A |
 
@@ -12341,7 +12341,7 @@ CODE_04E295:
   SEP #$10                                  ; $04E296 |
   LDX #$0B                                  ; $04E298 |
   LDA #$C70A                                ; $04E29A |
-  JSL r_gsu_init_1                          ; $04E29D | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E29D | GSU init
   LDA $617E                                 ; $04E2A1 |
   BNE CODE_04E2B9                           ; $04E2A4 |
   LDA #$0089                                ; $04E2A6 |\ play sound #$89
@@ -12365,7 +12365,7 @@ CODE_04E2C5:
   STA !gsu_r4                               ; $04E2CE |
   LDX #$0A                                  ; $04E2D1 |
   LDA #$91C9                                ; $04E2D3 |
-  JSL r_gsu_init_1                          ; $04E2D6 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E2D6 | GSU init
   LDA !gsu_r7                               ; $04E2DA |
   STA $00                                   ; $04E2DD |
   STA !gsu_r6                               ; $04E2DF |
@@ -12373,7 +12373,7 @@ CODE_04E2C5:
   STA !gsu_r0                               ; $04E2E5 |
   LDX #$08                                  ; $04E2E8 |
   LDA #$B2B2                                ; $04E2EA |
-  JSL r_gsu_init_1                          ; $04E2ED | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E2ED | GSU init
   LDA $2FFF                                 ; $04E2F1 |
   AND #$FF00                                ; $04E2F4 |
   STA $02                                   ; $04E2F7 |
@@ -12385,7 +12385,7 @@ CODE_04E2C5:
   STA !gsu_r0                               ; $04E307 |
   LDX #$08                                  ; $04E30A |
   LDA #$B2B2                                ; $04E30C |
-  JSL r_gsu_init_1                          ; $04E30F | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E30F | GSU init
   LDA $2FFF                                 ; $04E313 |
   AND #$FF00                                ; $04E316 |
   STA $02                                   ; $04E319 |
@@ -12412,7 +12412,7 @@ CODE_04E2C5:
   STA !gsu_r13                              ; $04E34E |
   LDX #$08                                  ; $04E351 |
   LDA #$8205                                ; $04E353 |
-  JSL r_gsu_init_1                          ; $04E356 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E356 | GSU init
   LDA #$0164                                ; $04E35A |
   STA !s_player_cur_anim_frame              ; $04E35D |
   LDA !r_yoshi_color                        ; $04E360 |
@@ -12432,7 +12432,7 @@ CODE_04E2C5:
   STA !gsu_r12                              ; $04E384 |
   LDX #$08                                  ; $04E387 |
   LDA #$E167                                ; $04E389 |
-  JSL r_gsu_init_1                          ; $04E38C | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E38C | GSU init
   LDY #$0A                                  ; $04E390 |
   LDX #$40                                  ; $04E392 |
   LDA !s_player_y_cam_rel                   ; $04E394 |
@@ -12460,10 +12460,10 @@ CODE_04E3BD:
   SEP #$10                                  ; $04E3C6 |
   LDX #$0B                                  ; $04E3C8 |
   LDA #$C70A                                ; $04E3CA |
-  JSL r_gsu_init_1                          ; $04E3CD | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E3CD | GSU init
   LDX #$0B                                  ; $04E3D1 |
   LDA #$C6F7                                ; $04E3D3 |
-  JSL r_gsu_init_1                          ; $04E3D6 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E3D6 | GSU init
   REP #$10                                  ; $04E3DA |
   LDA !s_player_tile_collision              ; $04E3DC |
   AND #$0180                                ; $04E3DF |
@@ -12739,7 +12739,7 @@ CODE_04E5D9:
   STA !gsu_r0                               ; $04E5F4 |
   LDX #$0A                                  ; $04E5F7 |
   LDA #$CE2F                                ; $04E5F9 |
-  JSL r_gsu_init_3                          ; $04E5FC | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_3)        ; $04E5FC | GSU init
   LDA #$0000                                ; $04E600 |
   LDY $300D                                 ; $04E603 |
   CPY #$3D                                  ; $04E606 |
@@ -12788,7 +12788,7 @@ CODE_04E64F:
   JSR CODE_04E661                           ; $04E652 |
   LDX #$0B                                  ; $04E655 |
   LDA #$C6DA                                ; $04E657 |
-  JSL r_gsu_init_4                          ; $04E65A | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_4)        ; $04E65A | GSU init
 
 CODE_04E65E:
   REP #$10                                  ; $04E65E |
@@ -12838,7 +12838,7 @@ CODE_04E685:
   STA !gsu_r8                               ; $04E6B5 |
   LDX #$0A                                  ; $04E6B8 |
   LDA #$CE2F                                ; $04E6BA |
-  JSL r_gsu_init_3                          ; $04E6BD | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_3)        ; $04E6BD | GSU init
   LDY !s_pipe_transition_type_lo            ; $04E6C1 |
   LDA !gsu_r6                               ; $04E6C4 |
   CMP $E692,y                               ; $04E6C7 |
@@ -12851,7 +12851,7 @@ CODE_04E685:
   STA !gsu_r0                               ; $04E6D9 |
   LDX #$0A                                  ; $04E6DC |
   LDA #$CE2F                                ; $04E6DE |
-  JSL r_gsu_init_3                          ; $04E6E1 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_3)        ; $04E6E1 | GSU init
   LDA !gsu_r6                               ; $04E6E5 |
   CMP #$7D24                                ; $04E6E8 |
   BNE CODE_04E729                           ; $04E6EB |
@@ -12984,7 +12984,7 @@ CODE_04E7BD:
   STA !gsu_r13                              ; $04E7F3 |
   LDX #$08                                  ; $04E7F6 |
   LDA #$8205                                ; $04E7F8 |
-  JSL r_gsu_init_1                          ; $04E7FB | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E7FB | GSU init
   LDA !s_spr_x_pixel_pos                    ; $04E7FF |
   STA !gsu_r1                               ; $04E802 |
   LDA !s_spr_y_pixel_pos                    ; $04E805 |
@@ -12999,14 +12999,14 @@ CODE_04E7BD:
   STA !gsu_r6                               ; $04E81E |
   LDX #$09                                  ; $04E821 |
   LDA #$907C                                ; $04E823 |
-  JSL r_gsu_init_1                          ; $04E826 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E826 | GSU init
   LDA !gsu_r1                               ; $04E82A |
   STA !s_player_x_speed_prev                ; $04E82D |
   LDA !gsu_r2                               ; $04E830 |
   STA !s_player_y_speed                     ; $04E833 |
   LDX #$0B                                  ; $04E836 |
   LDA #$C70A                                ; $04E838 |
-  JSL r_gsu_init_1                          ; $04E83B | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E83B | GSU init
   REP #$10                                  ; $04E83F |
   LDA !s_spr_x_pixel_pos                    ; $04E841 |
   SEC                                       ; $04E844 |
@@ -13070,7 +13070,7 @@ CODE_04E8AB:
   SEP #$10                                  ; $04E8BE |
   LDX #$0B                                  ; $04E8C0 |
   LDA #$C703                                ; $04E8C2 |
-  JSL r_gsu_init_1                          ; $04E8C5 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E8C5 | GSU init
   LDA !s_player_y_speed                     ; $04E8C9 |
   BMI CODE_04E8EA                           ; $04E8CC |
   LDA $3B                                   ; $04E8CE |
@@ -13089,7 +13089,7 @@ CODE_04E8EA:
   INC !s_player_dir_last_accel              ; $04E8EA |
   LDX #$0B                                  ; $04E8ED |
   LDA #$C6EF                                ; $04E8EF |
-  JSL r_gsu_init_4                          ; $04E8F2 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_4)        ; $04E8F2 | GSU init
   REP #$10                                  ; $04E8F6 |
   RTS                                       ; $04E8F8 |
 
@@ -13136,10 +13136,10 @@ CODE_04E957:
   STA !s_player_y_speed                     ; $04E957 |
   LDX #$0B                                  ; $04E95A |
   LDA #$C711                                ; $04E95C |
-  JSL r_gsu_init_1                          ; $04E95F | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E95F | GSU init
   LDX #$0B                                  ; $04E963 |
   LDA #$C6F7                                ; $04E965 |
-  JSL r_gsu_init_4                          ; $04E968 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_4)        ; $04E968 | GSU init
 
 CODE_04E96C:
   LDA $0CBC                                 ; $04E96C |
@@ -13178,7 +13178,7 @@ CODE_04E998:
   STA !gsu_r8                               ; $04E9B4 |
   LDX #$08                                  ; $04E9B7 |
   LDA #$C136                                ; $04E9B9 |
-  JSL r_gsu_init_1                          ; $04E9BC | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04E9BC | GSU init
 
 CODE_04E9C0:
   LDA #$0196                                ; $04E9C0 |
@@ -13233,7 +13233,7 @@ CODE_04E9DD:
   SEP #$10                                  ; $04EA27 |
   LDX #$08                                  ; $04EA29 |
   LDA #$8295                                ; $04EA2B |
-  JSL r_gsu_init_1                          ; $04EA2E | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04EA2E | GSU init
   LDA #$0164                                ; $04EA32 |
   BRA CODE_04EA92                           ; $04EA35 |
 
@@ -13262,7 +13262,7 @@ CODE_04EA4F:
   SEP #$10                                  ; $04EA67 |
   LDX #$08                                  ; $04EA69 |
   LDA #$C045                                ; $04EA6B |
-  JSL r_gsu_init_1                          ; $04EA6E | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04EA6E | GSU init
   LDA $6000                                 ; $04EA72 |
   LDY !s_player_direction                   ; $04EA75 |
   BNE CODE_04EA7E                           ; $04EA78 |
@@ -13442,7 +13442,7 @@ CODE_04EDF6:
   SEP #$10                                  ; $04EDFF |
   LDX #$08                                  ; $04EE01 |
   LDA #$B4A9                                ; $04EE03 |
-  JSL r_gsu_init_1                          ; $04EE06 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04EE06 | GSU init
   REP #$10                                  ; $04EE0A |
   BRA CODE_04EE63                           ; $04EE0C |
 
@@ -13504,7 +13504,7 @@ CODE_04EE66:
   SEP #$10                                  ; $04EE8A |
   LDX #$08                                  ; $04EE8C |
   LDA #$BA44                                ; $04EE8E |
-  JSL r_gsu_init_1                          ; $04EE91 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04EE91 | GSU init
   REP #$10                                  ; $04EE95 |
 
 CODE_04EE97:
@@ -14192,7 +14192,7 @@ draw_cross_section_masked:
   PHY                                       ; $04F57C |
   SEP #$10                                  ; $04F57D |
   LDA #gsu_draw_cross_section_masked        ; $04F57F | draws masked image
-  JSL r_gsu_init_1                          ; $04F582 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04F582 |
   REP #$10                                  ; $04F586 |
   PLY                                       ; $04F588 |\
   INY                                       ; $04F589 | | do 4 draws
@@ -14351,7 +14351,7 @@ player_control:
   SEP #$10                                  ; $04F6AE |
   LDX #$0B                                  ; $04F6B0 |
   LDA #$C71B                                ; $04F6B2 |
-  JSL r_gsu_init_4                          ; $04F6B5 |
+  JSL rom_to_wram_rt($7E,gsu_init_4)        ; $04F6B5 |
   LDA $6076                                 ; $04F6B9 |\ store APU noise mirror
   STA $51                                   ; $04F6BC |/ SRAM -> RAM
   LDA $607A                                 ; $04F6BE |\
@@ -14550,7 +14550,7 @@ CODE_04F83F:
   SEP #$10                                  ; $04F850 |
   LDX #$0B                                  ; $04F852 |
   LDA #$C6E7                                ; $04F854 |
-  JSL r_gsu_init_4                          ; $04F857 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_4)        ; $04F857 | GSU init
   REP #$10                                  ; $04F85B |
   RTS                                       ; $04F85D |
 
@@ -14638,7 +14638,7 @@ CODE_04F921:
   SEP #$10                                  ; $04F93F |
   LDX #$08                                  ; $04F941 |
   LDA #$AA7F                                ; $04F943 |
-  JSL r_gsu_init_1                          ; $04F946 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04F946 | GSU init
   REP #$10                                  ; $04F94A |
   PLY                                       ; $04F94C |
   LDX #$001C                                ; $04F94D |
@@ -14671,7 +14671,7 @@ CODE_04F968:
   SEP #$10                                  ; $04F98A |
   LDX #$08                                  ; $04F98C |
   LDA #$B4A9                                ; $04F98E |
-  JSL r_gsu_init_1                          ; $04F991 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04F991 | GSU init
   REP #$10                                  ; $04F995 |
 
 CODE_04F997:
@@ -14722,7 +14722,7 @@ CODE_04F9B2:
   SEP #$10                                  ; $04F9FE |
   LDX #$08                                  ; $04FA00 |
   LDA #$AA7F                                ; $04FA02 |
-  JSL r_gsu_init_1                          ; $04FA05 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04FA05 | GSU init
   REP #$10                                  ; $04FA09 |
   LDA #$0000                                ; $04FA0B |
   STA $70336C                               ; $04FA0E |
@@ -14864,7 +14864,7 @@ draw_player:
   SEP #$10                                  ; $04FB0B |
   LDX #gsu_draw_player>>16                  ; $04FB0D |
   LDA #gsu_draw_player                      ; $04FB0F |
-  JSL r_gsu_init_1                          ; $04FB12 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04FB12 |
 
 .ret
   SEP #$30                                  ; $04FB16 |
@@ -15045,7 +15045,7 @@ main_camera:
 .update_camera
   LDX #gsu_update_camera>>16                ; $04FDAE |
   LDA #gsu_update_camera                    ; $04FDB0 |
-  JSL r_gsu_init_1                          ; $04FDB3 |
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04FDB3 |
   LDA !s_bg1_cam_y                          ; $04FDB7 |\
   CLC                                       ; $04FDBA | | small correction of GSU
   ADC #$000C                                ; $04FDBB | | computation for Y
@@ -15158,7 +15158,7 @@ main_camera:
   STA !gsu_r13                              ; $04FE80 |
   LDX #$09                                  ; $04FE83 |
   LDA #$93B3                                ; $04FE85 |
-  JSL r_gsu_init_1                          ; $04FE88 | compute camera layers
+  JSL rom_to_wram_rt($7E,gsu_init_1)        ; $04FE88 | compute camera layers
   LDA !s_bg2_cam_x                          ; $04FE8C |
   STA $3D                                   ; $04FE8F |
   LDA !s_bg2_cam_y                          ; $04FE91 |
