@@ -91,6 +91,7 @@ CODE_1080EB:
   STA $707E70,x                             ; $108105 |/ store new checksum
   RTS                                       ; $108109 |
 
+CODE_10810A:
   PHB                                       ; $10810A |
   PHK                                       ; $10810B |
   PLB                                       ; $10810C |
@@ -338,6 +339,7 @@ save_game:
   PLB                                       ; $10832A |
   RTL                                       ; $10832B |
 
+CODE_10832C:
   PHB                                       ; $10832C |
   PHK                                       ; $10832D |
   PLB                                       ; $10832E |
@@ -1023,6 +1025,7 @@ unpack_level_header:
 
 ; Entry
 ; build map16 table?
+CODE_108B61:
   PHB                                       ; $108B61 |
   PHK                                       ; $108B62 |
   PLB                                       ; $108B63 |
@@ -1317,7 +1320,7 @@ gm0e_level_fadein_to_control:
   JSL CODE_00C71E                           ; $108D57 |
   DEC $8D                                   ; $108D5B |
   BNE CODE_108D73                           ; $108D5D |
-  JSL $03954E                               ; $108D5F |
+  JSL check_newspr_screen                           ; $108D5F |
   LDX #$5C                                  ; $108D63 |
 
 CODE_108D65:
@@ -1342,7 +1345,7 @@ CODE_108D75:
   INY                                       ; $108D7F |
   BEQ CODE_108DBB                           ; $108D80 |
   SEP #$20                                  ; $108D82 |
-  JSL $108E00                               ; $108D84 |
+  JSL CODE_108E00                           ; $108D84 |
   BRA CODE_108DE8                           ; $108D88 |
 
 CODE_108D8A:
@@ -1402,7 +1405,7 @@ CODE_108DE2:
 
 CODE_108DE8:
   SEP #$20                                  ; $108DE8 |
-  JSL $01C0CE                               ; $108DEA |
+  JSL CODE_01C0CE                           ; $108DEA |
   PLB                                       ; $108DEE |
   RTL                                       ; $108DEF |
 
@@ -1414,6 +1417,7 @@ CODE_108DE8:
 
   db $20, $10, $08                          ; $108DFD |
 
+CODE_108E00:
   PHB                                       ; $108E00 |
   PHK                                       ; $108E01 |
   PLB                                       ; $108E02 |
@@ -1538,8 +1542,8 @@ CODE_108EC3:
 
 CODE_108EDE:
   SEP #$20                                  ; $108EDE |
-  JSL $01C0CE                               ; $108EE0 |
-  JSL $108F49                               ; $108EE4 |
+  JSL CODE_01C0CE                           ; $108EE0 |
+  JSL CODE_108F49                           ; $108EE4 |
   LDA #$1F                                  ; $108EE8 |
   STA !r_reg_tmw_mirror                     ; $108EEA |
   STA !r_reg_tsw_mirror                     ; $108EED |
@@ -1590,6 +1594,7 @@ CODE_108F45:
   PLB                                       ; $108F47 |
   RTL                                       ; $108F48 |
 
+CODE_108F49:
   PHB                                       ; $108F49 |
   PHK                                       ; $108F4A |
   PLB                                       ; $108F4B |
@@ -1625,7 +1630,7 @@ CODE_108F88:
   ADC #$0010                                ; $108F92 |
   STA !s_leftmost_tile_x                    ; $108F95 |
   SEP #$30                                  ; $108F98 |
-  JSL $108C9A                               ; $108F9A |
+  JSL check_cross_section_spawn                           ; $108F9A |
   REP #$30                                  ; $108F9E |
   RTS                                       ; $108FA0 |
 
@@ -1657,6 +1662,7 @@ CODE_108FBF:
   PLB                                       ; $108FD4 |
   RTL                                       ; $108FD5 |
 
+CODE_108FD6:
   PHB                                       ; $108FD6 |
   PHK                                       ; $108FD7 |
   PLB                                       ; $108FD8 |
@@ -2574,7 +2580,7 @@ CODE_10963D:
   BEQ CODE_109676                           ; $109643 |
   PHX                                       ; $109645 |
   SEP #$10                                  ; $109646 |
-  JSL $0DA485                               ; $109648 |
+  JSL CODE_0DA485                           ; $109648 |
   REP #$10                                  ; $10964C |
   PLX                                       ; $10964E |
   LDA $93                                   ; $10964F |
@@ -3311,6 +3317,7 @@ CODE_109CA0:
   PLP                                       ; $109CA4 |
   RTS                                       ; $109CA5 |
 
+CODE_109CA6:
   JSR CODE_109C80                           ; $109CA6 |
   RTL                                       ; $109CA9 |
 
@@ -3987,7 +3994,7 @@ CODE_10A35E:
   TCD                                       ; $10A369 |
   LDX #$00                                  ; $10A36A |
   STX !s_cur_sprite_slot                    ; $10A36C |
-  JSL $06BCEC                               ; $10A36F |
+  JSL main_baby_mario                           ; $10A36F |
   JSL handle_ambient_sprites                ; $10A373 |
   PLD                                       ; $10A377 |
   PLB                                       ; $10A378 |
@@ -4114,7 +4121,7 @@ CODE_10A459:
   dw $0009, $000C                           ; $10A462 |
 
   SEP #$30                                  ; $10A466 |
-  JSL $01DE54                               ; $10A468 |
+  JSL message_box_handler                           ; $10A468 |
   REP #$30                                  ; $10A46C |
   JSR CODE_109CB2                           ; $10A46E |
   LDA !r_msg_box_state                      ; $10A471 |
@@ -4269,7 +4276,7 @@ CODE_10A5A4:
 CODE_10A5C4:
   JMP CODE_10A514                           ; $10A5C4 |
   SEP #$30                                  ; $10A5C7 |
-  JSL $01DE5A                               ; $10A5C9 |
+  JSL CODE_01DE5A                           ; $10A5C9 |
   REP #$30                                  ; $10A5CD |
   JSR CODE_109D27                           ; $10A5CF |
   LDA !r_msg_box_state                      ; $10A5D2 |
@@ -4330,7 +4337,7 @@ CODE_10A632:
   STA !r_game_mode                          ; $10A635 |
   STZ $0385                                 ; $10A638 |
   SEP #$30                                  ; $10A63B |
-  JSL $108279                               ; $10A63D |
+  JSL save_game                           ; $10A63D |
   REP #$30                                  ; $10A641 |
 
 CODE_10A643:
@@ -5327,7 +5334,7 @@ CODE_10AF2C:
 
 CODE_10AF31:
   LDX #$04                                  ; $10AF31 |
-  JSL $03B69D                               ; $10AF33 |
+  JSL CODE_03B69D                           ; $10AF33 |
 
 CODE_10AF37:
   REP #$10                                  ; $10AF37 |
@@ -7877,11 +7884,12 @@ CODE_10C3D9:
   db $10, $10, $10, $10                     ; $10C4BB |
 
   SEP #$30                                  ; $10C4BF |
-  JSL $10C4CB                               ; $10C4C1 |
+  JSL CODE_10C4CB                           ; $10C4C1 |
   JSR CODE_10CC3A                           ; $10C4C5 |
   REP #$30                                  ; $10C4C8 |
   RTS                                       ; $10C4CA |
 
+CODE_10C4CB:
   LDX $1165                                 ; $10C4CB |
   LDA $10C4B3,x                             ; $10C4CE |
   STA $03                                   ; $10C4D2 |
@@ -10631,7 +10639,7 @@ CODE_10DB53:
   JSL copy_division_lookup_to_sram          ; $10DB6B |
   LDX #$11                                  ; $10DB6F |
   JSL set_level_music                       ; $10DB71 |
-  JSL $108B61                               ; $10DB75 |
+  JSL CODE_108B61                           ; $10DB75 |
   REP #$20                                  ; $10DB79 |
   LDA #$0720                                ; $10DB7B |
   STA $0C27                                 ; $10DB7E |
@@ -10648,7 +10656,7 @@ CODE_10DB53:
   STA !s_leftmost_tile_x                    ; $10DB99 |
   SEP #$20                                  ; $10DB9C |
   INC !r_level_load_type                    ; $10DB9E |
-  JSL $108FD6                               ; $10DBA1 |
+  JSL CODE_108FD6                           ; $10DBA1 |
   STZ !r_level_load_type                    ; $10DBA5 |
   REP #$20                                  ; $10DBA8 |
   LDA #$0040                                ; $10DBAA |
@@ -10670,7 +10678,7 @@ CODE_10DB53:
   STA !s_player_x                           ; $10DBD8 |
   LDA #$0790                                ; $10DBDB |
   STA !s_player_y                           ; $10DBDE |
-  JSL $04DC28                               ; $10DBE1 |
+  JSL CODE_04DC28                           ; $10DBE1 |
   LDA #$10                                  ; $10DBE5 |
   STA !s_spr_state                          ; $10DBE7 |
   LDA #$03                                  ; $10DBEA |
@@ -10774,11 +10782,11 @@ gm39_intro_cutscene:
   LDA #$0081                                ; $10DCBB |
   STA !s_cam_x_window_min                   ; $10DCBE |
   SEP #$20                                  ; $10DCC1 |
-  JSL $04FD28                               ; $10DCC3 |
+  JSL main_camera                           ; $10DCC3 |
   JSL spr_edge_despawn_draw_check_warp      ; $10DCC7 |
   JSL draw_player                           ; $10DCCB |
   JSL main_player                           ; $10DCCF |
-  JSL $0397DF                               ; $10DCD3 |
+  JSL CODE_0397DF                           ; $10DCD3 |
   REP #$20                                  ; $10DCD7 |
   LDX #$A908                                ; $10DCD9 |
   SBC $4422B1                               ; $10DCDC |
@@ -10870,7 +10878,7 @@ CODE_10DD87:
   RTS                                       ; $10DD87 |
 
 CODE_10DD88:
-  JSL $01DE5A                               ; $10DD88 |
+  JSL CODE_01DE5A                           ; $10DD88 |
   LDA #$20                                  ; $10DD8C |
   TSB !r_reg_hdmaen_mirror                  ; $10DD8E |
   LDA #$00                                  ; $10DD91 |
