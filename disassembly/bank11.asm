@@ -8398,70 +8398,117 @@ CODE_11CA07:
   JMP CODE_11C9D1                           ; $11CA12 |
 
 ; level object data
+level_05_obj_data:
   incbin level/level-05-obj.bin             ; $11CA15 |
+level_3E_obj_data:
   incbin level/level-3E-obj.bin             ; $11CC89 |
+level_6F_obj_data:
   incbin level/level-6F-obj.bin             ; $11CE64 |
+level_9A_obj_data:
   incbin level/level-9A-obj.bin             ; $11CF8C |
 
 ; level sprite data
+level_05_spr_data:
   incbin level/level-05-spr.bin             ; $11D2BB |
+level_3E_spr_data:
   incbin level/level-3E-spr.bin             ; $11D34D |
+level_6F_spr_data:
   incbin level/level-6F-spr.bin             ; $11D39A |
+level_9A_spr_data:
   incbin level/level-9A-spr.bin             ; $11D3B4 |
 
 ; level object data
+level_15_obj_data:
   incbin level/level-15-obj.bin             ; $11D3EF |
+level_4D_obj_data:
   incbin level/level-4D-obj.bin             ; $11D547 |
+level_7B_obj_data:
   incbin level/level-7B-obj.bin             ; $11D8B1 |
+level_A3_obj_data:
   incbin level/level-A3-obj.bin             ; $11DB2E |
+level_BF_obj_data:
   incbin level/level-BF-obj.bin             ; $11DC0F | also D0
+level_C9_obj_data:
   incbin level/level-C9-obj.bin             ; $11DC87 |
+level_D5_obj_data:
   incbin level/level-D5-obj.bin             ; $11DC9C |
+level_D7_obj_data:
   incbin level/level-D7-obj.bin             ; $11DDF6 |
 
 ; level sprite data
+level_15_spr_data:
   incbin level/level-15-spr.bin             ; $11DE77 |
+level_4D_spr_data:
   incbin level/level-4D-spr.bin             ; $11DEB5 |
+level_7B_spr_data:
   incbin level/level-7B-spr.bin             ; $11DF32 |
+level_A3_spr_data:
   incbin level/level-A3-spr.bin             ; $11DFA3 |
+level_BF_spr_data:
   incbin level/level-BF-spr.bin             ; $11DFBA |
+level_C9_spr_data:
   incbin level/level-C9-spr.bin             ; $11DFBF |
+level_D0_spr_data:
   incbin level/level-D0-spr.bin             ; $11DFC4 |
+level_D5_spr_data:
   incbin level/level-D5-spr.bin             ; $11DFC9 |
+level_D7_spr_data:
   incbin level/level-D7-spr.bin             ; $11DFF2 |
 
 ; level object data
+level_21_obj_data:
   incbin level/level-21-obj.bin             ; $11E01E |
+level_58_obj_data:
   incbin level/level-58-obj.bin             ; $11E511 |
+level_85_obj_data:
   incbin level/level-85-obj.bin             ; $11E6F7 |
 
 ; level sprite data
+level_21_spr_data:
   incbin level/level-21-spr.bin             ; $11E767 |
+level_58_spr_data:
   incbin level/level-58-spr.bin             ; $11E802 |
+level_85_spr_data:
   incbin level/level-85-spr.bin             ; $11E876 |
 
 ; level object data
+level_2D_obj_data:
   incbin level/level-2D-obj.bin             ; $11E8B1 |
+level_64_obj_data:
   incbin level/level-64-obj.bin             ; $11EA84 |
+level_90_obj_data:
   incbin level/level-90-obj.bin             ; $11ED0B |
+level_B5_obj_data:
   incbin level/level-B5-obj.bin             ; $11F048 |
 
 ; level sprite data
+level_2D_spr_data:
   incbin level/level-2D-spr.bin             ; $11F1E1 |
+level_64_spr_data:
   incbin level/level-64-spr.bin             ; $11F288 |
+level_90_spr_data:
   incbin level/level-90-spr.bin             ; $11F2F9 |
+level_B5_spr_data:
   incbin level/level-B5-spr.bin             ; $11F373 |
 
 ; level object data
+level_35_obj_data:
   incbin level/level-35-obj.bin             ; $11F3DE |
+level_6C_obj_data:
   incbin level/level-6C-obj.bin             ; $11F774 |
+level_98_obj_data:
   incbin level/level-98-obj.bin             ; $11F92E |
+level_B9_obj_data:
   incbin level/level-B9-obj.bin             ; $11FAA9 |
 
 ; level sprite data
+level_35_spr_data:
   incbin level/level-35-spr.bin             ; $11FB9F |
+level_6C_spr_data:
   incbin level/level-6C-spr.bin             ; $11FC22 |
+level_98_spr_data:
   incbin level/level-98-spr.bin             ; $11FC93 |
+level_B9_spr_data:
   incbin level/level-B9-spr.bin             ; $11FD6A |
 
 ; freespace

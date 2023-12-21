@@ -12830,21 +12830,35 @@ CODE_10EA41:
   db $FF                                    ; $10F261 |
 
 ; level object data (except one sprite)
+level_04_obj_data:
   incbin level/level-04-obj.bin             ; $10F262 |
+level_04_spr_data:
   incbin level/level-04-spr.bin             ; $10F4FA |
+level_30_obj_data:
   incbin level/level-30-obj.bin             ; $10F595 |
+level_67_obj_data:
   incbin level/level-67-obj.bin             ; $10F6EF |
+level_93_obj_data:
   incbin level/level-93-obj.bin             ; $10F8DF |
+level_B6_obj_data:
   incbin level/level-B6-obj.bin             ; $10F9D3 |
+level_C5_obj_data:
   incbin level/level-C5-obj.bin             ; $10FB77 |
+level_CC_obj_data:
   incbin level/level-CC-obj.bin             ; $10FBF2 |
 
 ; level sprite data
+level_30_spr_data:
   incbin level/level-30-spr.bin             ; $10FCE5 |
+level_67_spr_data:
   incbin level/level-67-spr.bin             ; $10FD92 |
+level_93_spr_data:
   incbin level/level-93-spr.bin             ; $10FDA3 |
+level_B6_spr_data:
   incbin level/level-B6-spr.bin             ; $10FE9E |
+level_C5_spr_data:
   incbin level/level-C5-spr.bin             ; $10FF39 |
+level_CC_spr_data:
   incbin level/level-CC-spr.bin             ; $10FF8F |
 
 ; freespace

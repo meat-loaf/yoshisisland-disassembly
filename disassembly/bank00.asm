@@ -10827,23 +10827,39 @@ raphael_mode7_matrix_b_c:
   dw $0019, $0013, $000D, $0006             ; $00EBCC |
 
 ; level object data
+level_10_obj_data:
   incbin level/level-10-obj.bin             ; $00EBD4 |
+level_48_obj_data:
   incbin level/level-48-obj.bin             ; $00ECA1 |
+level_78_obj_data:
   incbin level/level-78-obj.bin             ; $00EE40 |
+level_A1_obj_data:
   incbin level/level-A1-obj.bin             ; $00EFFE |
+level_BE_obj_data:
   incbin level/level-BE-obj.bin             ; $00F2C3 |
+level_C8_obj_data:
   incbin level/level-C8-obj.bin             ; $00F40A |
+level_CF_obj_data:
   incbin level/level-CF-obj.bin             ; $00F4EF |
+level_D4_obj_data:
   incbin level/level-D4-obj.bin             ; $00F50A |
 
 ; level sprite data
+level_10_spr_data:
   incbin level/level-10-spr.bin             ; $00F614 |
+level_48_spr_data:
   incbin level/level-48-spr.bin             ; $00F625 |
+level_78_spr_data:
   incbin level/level-78-spr.bin             ; $00F678 |
+level_A1_spr_data:
   incbin level/level-A1-spr.bin             ; $00F6B3 |
+level_BE_spr_data:
   incbin level/level-BE-spr.bin             ; $00F71E |
+level_C8_spr_data:
   incbin level/level-C8-spr.bin             ; $00F750 |
+level_CF_spr_data:
   incbin level/level-CF-spr.bin             ; $00F773 |
+level_D4_spr_data:
   incbin level/level-D4-spr.bin             ; $00F77B |
 
 ; freespace

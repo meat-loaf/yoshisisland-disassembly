@@ -7152,53 +7152,101 @@ CODE_12C6FF:
   RTL                                       ; $12C708 |
 
 ; level data
+level_06_obj_data:
   incbin level/level-06-obj.bin             ; $12C709 |
+level_3F_obj_data:
   incbin level/level-3F-obj.bin             ; $12CE48 |
+level_06_spr_data:
   incbin level/level-06-spr.bin             ; $12CF07 |
+level_3F_spr_data:
   incbin level/level-3F-spr.bin             ; $12CFBD |
+level_09_obj_data:
   incbin level/level-09-obj.bin             ; $12D00A |
+level_41_obj_data:
   incbin level/level-41-obj.bin             ; $12D150 |
+level_71_obj_data:
   incbin level/level-71-obj.bin             ; $12D53C |
+level_9C_obj_data:
   incbin level/level-9C-obj.bin             ; $12D623 |
+level_BA_obj_data:
   incbin level/level-BA-obj.bin             ; $12D89C |
+level_09_spr_data:
   incbin level/level-09-spr.bin             ; $12D8E2 |
+level_41_spr_data:
   incbin level/level-41-spr.bin             ; $12D91D |
+level_71_spr_data:
   incbin level/level-71-spr.bin             ; $12D9E8 |
+level_9C_spr_data:
   incbin level/level-9C-spr.bin             ; $12DA1A |
+level_BA_spr_data:
   incbin level/level-BA-spr.bin             ; $12DA55 |
+level_11_obj_data:
   incbin level/level-11-obj.bin             ; $12DA6C |
+level_49_obj_data:
   incbin level/level-49-obj.bin             ; $12DC3F |
+level_11_spr_data:
   incbin level/level-11-spr.bin             ; $12DD4A |
+level_49_spr_data:
   incbin level/level-49-spr.bin             ; $12DDCA |
+level_1E_obj_data:
   incbin level/level-1E-obj.bin             ; $12DDE1 |
+level_55_obj_data:
   incbin level/level-55-obj.bin             ; $12DF5D |
+level_82_obj_data:
   incbin level/level-82-obj.bin             ; $12E347 |
+level_AA_obj_data:
   incbin level/level-AA-obj.bin             ; $12E3E1 |
+level_C1_obj_data:
   incbin level/level-C1-obj.bin             ; $12E7C7 |
+level_1E_spr_data:
   incbin level/level-1E-spr.bin             ; $12E8A7 |
+level_55_spr_data:
   incbin level/level-55-spr.bin             ; $12E915 |
+level_82_spr_data:
   incbin level/level-82-spr.bin             ; $12EA22 |
+level_AA_spr_data:
   incbin level/level-AA-spr.bin             ; $12EA2A |
+level_C1_spr_data:
   incbin level/level-C1-spr.bin             ; $12EB37 |
+level_29_obj_data:
   incbin level/level-29-obj.bin             ; $12EB8A |
+level_60_obj_data:
   incbin level/level-60-obj.bin             ; $12ED05 |
+level_8C_obj_data:
   incbin level/level-8C-obj.bin             ; $12EE6E |
+level_29_spr_data:
   incbin level/level-29-spr.bin             ; $12EEC2 |
+level_60_spr_data:
   incbin level/level-60-spr.bin             ; $12EF99 |
+level_8C_spr_data:
   incbin level/level-8C-spr.bin             ; $12F043 |
+level_2C_obj_data:
   incbin level/level-2C-obj.bin             ; $12F04E |
+level_63_obj_data:
   incbin level/level-63-obj.bin             ; $12F1CB |
+level_8F_obj_data:
   incbin level/level-8F-obj.bin             ; $12F3EF |
+level_B4_obj_data:
   incbin level/level-B4-obj.bin             ; $12F4D1 |
+level_2C_spr_data:
   incbin level/level-2C-spr.bin             ; $12F77D |
+level_63_spr_data:
   incbin level/level-63-spr.bin             ; $12F7E8 |
+level_8F_spr_data:
   incbin level/level-8F-spr.bin             ; $12F80B |
+level_B4_spr_data:
   incbin level/level-B4-spr.bin             ; $12F81F |
+level_2F_obj_data:
   incbin level/level-2F-obj.bin             ; $12F8B1 |
+level_66_obj_data:
   incbin level/level-66-obj.bin             ; $12FAD5 |
+level_92_obj_data:
   incbin level/level-92-obj.bin             ; $12FC74 |
+level_2F_spr_data:
   incbin level/level-2F-spr.bin             ; $12FE33 |
+level_66_spr_data:
   incbin level/level-66-spr.bin             ; $12FEC2 |
+level_92_spr_data:
   incbin level/level-92-spr.bin             ; $12FF39 |
 
 ; freespace

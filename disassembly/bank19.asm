@@ -11575,21 +11575,37 @@ DATA_19D61A:
   db $A3, $00, $A3, $00, $A3, $0C, $A3, $00 ; $19E09A |
 
 ; level data
+level_01_obj_data:
   incbin level/level-01-obj.bin             ; $19E0A2 |
+level_3B_obj_data:
   incbin level/level-3B-obj.bin             ; $19E25E |
+level_01_spr_data:
   incbin level/level-01-spr.bin             ; $19E976 |
+level_3B_spr_data:
   incbin level/level-3B-spr.bin             ; $19EA17 |
+level_23_obj_data:
   incbin level/level-23-obj.bin             ; $19EACA |
+level_5A_obj_data:
   incbin level/level-5A-obj.bin             ; $19F046 |
+level_23_spr_data:
   incbin level/level-23-spr.bin             ; $19F3D9 |
+level_5A_spr_data:
   incbin level/level-5A-spr.bin             ; $19F43B |
+level_2A_obj_data:
   incbin level/level-2A-obj.bin             ; $19F4D9 |
+level_61_obj_data:
   incbin level/level-61-obj.bin             ; $19F9FC |
+level_8D_obj_data:
   incbin level/level-8D-obj.bin             ; $19FA82 |
+level_B2_obj_data:
   incbin level/level-B2-obj.bin             ; $19FC7A |
+level_2A_spr_data:
   incbin level/level-2A-spr.bin             ; $19FD2F |
+level_61_spr_data:
   incbin level/level-61-spr.bin             ; $19FE27 |
+level_8D_spr_data:
   incbin level/level-8D-spr.bin             ; $19FE3B |
+level_B2_spr_data:
   incbin level/level-B2-spr.bin             ; $19FE9A |
 
 ; freespace

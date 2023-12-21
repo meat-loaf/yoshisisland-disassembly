@@ -1,11 +1,17 @@
 org $228000
 
 ; level data
+level_32_obj_data:
   incbin level/level-32-obj.bin             ; $228000 |
+level_69_obj_data:
   incbin level/level-69-obj.bin             ; $228691 |
+level_95_obj_data:
   incbin level/level-95-obj.bin             ; $228B51 |
+level_32_spr_data:
   incbin level/level-32-spr.bin             ; $228EEC |
+level_69_spr_data:
   incbin level/level-69-spr.bin             ; $228FDB |
+level_95_spr_data:
   incbin level/level-95-spr.bin             ; $22906A |
 
 ; text pointers (4 pointers per level)
