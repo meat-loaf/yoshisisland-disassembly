@@ -9617,6 +9617,7 @@ CODE_00DE43:
 
 gsu_init_1:
   STZ !gsu_sfr                              ; $00DE44 |  nuke GSU status/flag register
+.alt:
   LDY $012D                                 ; $00DE47 |\ set SCBR
   STY !gsu_scbr                             ; $00DE4A |/
   LDY $012E                                 ; $00DE4D |\ set SCMR

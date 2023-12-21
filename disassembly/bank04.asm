@@ -514,7 +514,7 @@ CODE_0483CA:
 CODE_0483E1:
   LDX #$09                                  ; $0483E1 |
   LDA !gsu_r15                              ; $0483E3 |
-  JSL $7EDE47                               ; $0483E6 | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1_alt)    ; $0483E6 | GSU init
   BRA CODE_0483CA                           ; $0483EA |
 
 CODE_0483EC:
@@ -585,7 +585,7 @@ CODE_04844E:
 CODE_04846A:
   LDX #$09                                  ; $04846A |
   LDA !gsu_r15                              ; $04846C |
-  JSL $7EDE47                               ; $04846F | GSU init
+  JSL rom_to_wram_rt($7E,gsu_init_1_alt)    ; $04846F | GSU init
   BRA CODE_04844E                           ; $048473 |
 
 CODE_048475:
